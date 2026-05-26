@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W.CONCEPT | 亚马逊跨境视觉全案设计专家官网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+
+        :root {
+            --bg-color: #121218;
+            --bg-gradient-start: #121218;
+            --bg-gradient-end: #1a1a24;
+            --text-color: #f0f0f5;
+            --grid-color: rgba(0, 209, 209, 0.04);
+            --grid-line: rgba(0, 209, 209, 0.06);
+            --secondary-text: #8888a0;
+            --border-color: rgba(0, 209, 209, 0.12);
+            --accent-purple: #7c3aed;
+            --accent-cyan: #00D1D1;
+            --accent-cyan-dim: rgba(0, 209, 209, 0.3);
+            --neon-glow: rgba(0, 209, 209, 0.15);
+            --cursor-size: 8px;
+        }
+
+        body.light-mode {
+            --bg-color: #fafafa;
+            --bg-gradient-start: #fafafa;
+            --bg-gradient-end: #f0f0f5;
+            --text-color: #1a1a24;
+            --grid-color: rgba(0, 209, 209, 0.02);
+            --grid-line: rgba(0, 209, 209, 0.03);
+            --secondary-text: #555570;
+            --border-color: rgba(0, 209, 209, 0.08);
+        }
+
+        body.light-mode .hero-bg-text {
+            color: rgba(148, 0, 211, 0.03);
+        }
+
+        body.light-mode .glowing-blob {
+            opacity: 0.08;
+        }
+
+        body.light-mode .gradient-overlay-top {
+            background: linear-gradient(180deg, rgba(147, 51, 234, 0.03) 0%, transparent 100%);
+        }
+
+        body.light-mode .gradient-overlay-bottom {
+            background: linear-gradient(0deg, rgba(6, 182, 212, 0.03) 0%, transparent 100%);
+        }
+
+        body.light-mode {
+            background-image: 
+                radial-gradient(ellipse at 20% 0%, rgba(147, 51, 234, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(6, 182, 212, 0.04) 0%, transparent 50%),
+                linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+                linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+        }
+
+        body.light-mode .btn-cyber {
+            background: linear-gradient(135deg, rgba(148,0,211,0.1) 0%, rgba(255,255,255,0.8) 100%);
+            border-color: rgba(148, 0, 211, 0.3);
+            color: #1e1e2e;
+        }
+
+        body.light-mode .btn-cyber:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 25px rgba(148, 0, 211, 0.2);
+        }
+
+        body.light-mode .portfolio-gallery-card {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        body.light-mode #theme-toggle {
+            background: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: #1e1e2e;
+        }
+
+        body.light-mode #theme-toggle:hover {
+            border-color: var(--accent-purple);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 209, 209, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, rgba(124, 58, 237, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 20%, rgba(0, 209, 209, 0.03) 0%, transparent 40%);
+            background-size: 100% 100%;
+            color: var(--text-color);
+            scroll-behavior: smooth;
+            cursor: none;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .perspective-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 60px,
+                    var(--grid-line) 60px,
+                    var(--grid-line) 61px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 60px,
+                    var(--grid-line) 60px,
+                    var(--grid-line) 61px
+                );
+            transform-style: preserve-3d;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: center bottom;
+            opacity: 0.6;
+            transition: transform 0.1s ease-out;
+        }
+
+        .perspective-grid::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent-cyan-dim) 0%, transparent 100%);
+            transform: translateX(-50%);
+        }
+
+        .perspective-grid::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan-dim), transparent);
+            transform: translateY(-50%);
+        }
+
+        .glowing-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+            mix-blend-mode: screen;
+            transition: transform 0.3s ease-out;
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .gradient-overlay-top {
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50%;
+            background: linear-gradient(180deg, rgba(0, 209, 209, 0.06) 0%, transparent 100%);
+        }
+
+        .gradient-overlay-bottom {
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30%;
+            background: linear-gradient(0deg, rgba(124, 58, 237, 0.05) 0%, transparent 100%);
+        }
+
+        /* 粒子容器 */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            opacity: 0.4;
+            transition: transform 0.15s ease-out, opacity 0.2s ease;
+            box-shadow: 0 0 6px var(--accent-cyan), 0 0 12px rgba(0, 209, 209, 0.3);
+        }
+
+        .particle:hover {
+            opacity: 0.8;
+            transform: scale(1.5);
+        }
+
+        /* 各区块差异化背景效果 */
+        section {
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        #home {
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(0, 209, 209, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 80%, rgba(124, 58, 237, 0.06) 0%, transparent 40%);
+            background-size: 100% 100%;
+        }
+
+        #services {
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 209, 209, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(124, 58, 237, 0.04) 0%, transparent 50%);
+            background-size: 100% 100%;
+        }
+
+        #portfolio {
+            background: 
+                radial-gradient(ellipse at 50% 0%, rgba(0, 209, 209, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(124, 58, 237, 0.03) 0%, transparent 50%);
+            background-size: 100% 100%;
+        }
+
+        #about {
+            background: 
+                radial-gradient(ellipse at 10% 30%, rgba(0, 209, 209, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 90% 70%, rgba(124, 58, 237, 0.05) 0%, transparent 40%);
+            background-size: 100% 100%;
+        }
+
+        #contact {
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 209, 209, 0.06) 0%, transparent 60%);
+            background-size: 100% 100%;
+        }
+
+        #custom-cursor {
+            width: var(--cursor-size);
+            height: var(--cursor-size);
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease-out, background-color 0.3s;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        #cursor-follower {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--accent-purple);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s;
+            transform: translate(-50%, -50%);
+            opacity: 0.4;
+        }
+
+        .cursor-hover #custom-cursor {
+            transform: translate(-50%, -50%) scale(5);
+            background-color: var(--accent-purple);
+            box-shadow: 0 0 15px var(--accent-purple);
+        }
+        
+        .cursor-hover #cursor-follower {
+            transform: translate(-50%, -50%) scale(1.6);
+            border-color: var(--accent-cyan);
+            opacity: 0.8;
+        }
+
+        .hero-bg-text {
+            font-size: 16vw;
+            line-height: 0.8;
+            font-weight: 900;
+            color: rgba(148, 0, 211, 0.04);
+            position: absolute;
+            z-index: -2;
+            user-select: none;
+            white-space: nowrap;
+            will-change: transform;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        nav.nav-scrolled {
+            background-color: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(20px);
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: width 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--accent-cyan);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .btn-cyber {
+            background: linear-gradient(135deg, rgba(148,0,211,0.2) 0%, rgba(0,0,0,0.6) 100%);
+            border: 1px solid var(--accent-purple);
+            color: #fff;
+            padding: 1.1rem 2.8rem;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(148, 0, 211, 0.15);
+        }
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,255,255,0.25), transparent);
+            transition: all 0.6s ease;
+        }
+        .btn-cyber:hover::before {
+            left: 100%;
+        }
+        .btn-cyber:hover {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .category-tag {
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            background: rgba(138, 43, 226, 0.05);
+            padding: 6px 16px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+        }
+        .category-tag.active, .category-tag:hover {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: #fff;
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+        }
+
+        /* 网格卡片高科技悬停动效 */
+        .portfolio-gallery-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border-color);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .portfolio-gallery-card:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 255, 255, 0.02);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.08);
+        }
+
+        @media (max-width: 768px) {
+            #custom-cursor, #cursor-follower { display: none; }
+            body { cursor: auto; }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- 透视网格背景 -->
+    <div class="perspective-grid"></div>
+    
+    <!-- 粒子容器 -->
+    <div class="particles-container" id="particles-container"></div>
+
+    <div id="custom-cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <!-- 背景渐变叠加层 -->
+    <div class="gradient-overlay gradient-overlay-top"></div>
+    <div class="gradient-overlay gradient-overlay-bottom"></div>
+
+    <!-- 发光blob效果 -->
+    <div class="glowing-blob w-[600px] h-[600px] bg-purple-600 top-20 -left-60 animate-pulse"></div>
+    <div class="glowing-blob w-[700px] h-[700px] bg-indigo-900 bottom-40 -right-60"></div>
+    <div class="glowing-blob w-[400px] h-[400px] bg-cyan-600/80 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.08]"></div>
+    <div class="glowing-blob w-[300px] h-[300px] bg-pink-600/60 top-80 right-1/4 opacity-[0.06]"></div>
+    <div class="glowing-blob w-[350px] h-[350px] bg-violet-600/50 bottom-1/3 left-1/4 opacity-[0.05]"></div>
+
+    <nav id="navbar" class="fixed w-full z-50 px-8 py-6 flex justify-between items-center transition-all duration-500">
+        <div class="text-2xl font-black tracking-tighter cursor-pointer text-white flex items-center gap-2">
+        </div>
+        <div class="hidden md:flex space-x-10 uppercase text-xs font-bold tracking-[0.2em] items-center">
+            <a href="#home" class="nav-link">首页</a>
+            <a href="#portfolio" class="nav-link">作品集</a>
+            <a href="#services" class="nav-link">服务项目</a>
+            <a href="#about" class="nav-link">关于我</a>
+            <a href="#contact" class="nav-link">联系合作</a>
+            <button id="theme-toggle" class="w-8 h-8 rounded-full bg-zinc-800/80 border border-zinc-600 flex items-center justify-center text-white hover:border-cyan-400 hover:bg-zinc-700 transition-all duration-300 cursor-pointer">
+                <i class="fa-solid fa-sun" id="theme-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section id="home" class="relative min-h-screen flex items-center pt-24 px-8">
+        <div class="hero-bg-text parallax top-1/4 -left-10" data-speed="0.1">TRANSCEND</div>
+        <div class="hero-bg-text parallax bottom-1/4 -right-10" data-speed="-0.15">AMAZON</div>
+        
+        <!-- 右上角装饰图案 -->
+        <div class="absolute top-24 right-8 w-64 h-64 pointer-events-none overflow-hidden">
+            <!-- 圆环装饰 -->
+            <div class="absolute top-0 right-0 w-40 h-40 border border-purple-500/20 rounded-full"></div>
+            <div class="absolute top-4 right-4 w-32 h-32 border border-cyan-500/15 rounded-full"></div>
+            <div class="absolute top-8 right-8 w-24 h-24 border border-pink-500/10 rounded-full"></div>
+            
+            <!-- 十字星装饰 -->
+            <div class="absolute top-12 right-20 w-3 h-3 bg-purple-400/60 rounded-full animate-pulse"></div>
+            <div class="absolute top-24 right-8 w-2 h-2 bg-cyan-400/50 rounded-full"></div>
+            <div class="absolute top-32 right-28 w-2 h-2 bg-pink-400/40 rounded-full"></div>
+            
+            <!-- 几何线条 -->
+            <div class="absolute top-16 right-16 w-20 h-px bg-gradient-to-r from-purple-500/30 to-transparent rotate-45"></div>
+            <div class="absolute top-28 right-12 w-16 h-px bg-gradient-to-r from-cyan-500/20 to-transparent -rotate-12"></div>
+            
+            <!-- 六边形装饰 -->
+            <svg class="absolute top-20 right-32 w-12 h-12 text-purple-500/15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="reveal">
+                <h1 class="text-4xl md:text-6xl font-black leading-none mb-8 text-white">
+                    ADDICTED <br>
+                    <span class="text-outline" style="-webkit-text-stroke: 1px var(--accent-cyan);">TO</span> <br>
+                    SUCCESS.
+                </h1>
+                <p class="text-lg text-[var(--secondary-text)] mb-10 max-w-md leading-relaxed border-l-2 border-[var(--accent-purple)] pl-6">
+                    专注国内国外电商视觉全案。通过欧美原生的审美逻辑与数据转化法则，为头部跨境品牌提供极具爆发力的 Listing主副图、旗舰店整店创意设计。
+                </p>
+                
+                <div class="mt-8">
+                    <a href="#contact" class="btn-cyber">立即咨询</a>
+                </div>
+            </div>
+            
+            <!-- 右侧大头像展示 -->
+            <div class="reveal hidden md:block">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-cyan-500/20 blur-3xl rounded-full"></div>
+                    <img src="大头像.png" alt="设计师形象" class="relative w-full max-w-lg mx-auto rounded-2xl border border-purple-500/30 shadow-2xl shadow-purple-500/10 object-cover aspect-[3/4]">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 服务项目板块 -->
+    <section id="services" class="py-32 px-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/10 to-zinc-950/30"></div>
+        <div class="container mx-auto relative z-10">
+            <div class="mb-20 reveal">
+                <h2 class="text-4xl font-black text-white">服务项目</h2>
+                <p class="text-[var(--secondary-text)] mt-2">SERVICES / 跨境视觉解决方案</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
+                    <h3 class="font-bold text-xl mb-4 text-white">产品主副图全套</h3>
+                    <p class="text-[var(--secondary-text)] text-sm">高点击率白底图、场景合成图、对比评测图设计。</p>
+                </div>
+                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
+                    <h3 class="font-bold text-xl mb-4 text-white">品牌旗舰店装修</h3>
+                    <p class="text-[var(--secondary-text)] text-sm">旗舰店风格系统设计与故事感页面构建。</p>
+                </div>
+                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
+                    <h3 class="font-bold text-xl mb-4 text-white">高阶3D建模渲染</h3>
+                    <p class="text-[var(--secondary-text)] text-sm">像素级产品建模与光影精修，创造高端溢价视觉。</p>
+                </div>
+                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
+                    <h3 class="font-bold text-xl mb-4 text-white">AI视频制作</h3>
+                    <p class="text-[var(--secondary-text)] text-sm">AI驱动的产品动画、功能演示视频、品牌故事短片制作，提升产品转化率。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品集板块 -->
+    <section id="portfolio" class="py-32 px-0 border-t border-[var(--border-color)]">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+                <div>
+                    <h2 class="text-4xl font-black text-white">作品集</h2>
+                    <p class="text-[var(--secondary-text)] mt-2">PORTFOLIO / 跨境视觉落地案例</p>
+                </div>
+                <div class="mt-8 md:mt-0 flex gap-3">
+                    <span class="category-tag active" data-filter="all">全部</span>
+                    <span class="category-tag" data-filter="video">产品视频</span>
+                    <span class="category-tag" data-filter="image">产品图片</span>
+                    <span class="category-tag" data-filter="storyboard">产品分镜</span>
+                </div>
+            </div>
+
+            <!-- 视频轮播 -->
+            <div id="portfolio-video" class="reveal mb-16">
+                <div class="relative w-full mx-auto overflow-hidden rounded-2xl border border-[var(--border-color)] bg-black/40 backdrop-blur-md shadow-2xl group/video-carousel aspect-video">
+                    <!-- 轮播轨道 -->
+                    <div id="video-carousel-track" class="flex h-full transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1) will-change-transform">
+                        <!-- 视频1: 耳机.mp4 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <video 
+                                id="video-0"
+                                src="耳机.mp4" 
+                                class="w-full h-full object-cover"
+                                muted
+                                loop
+                                playsinline
+                                autoplay
+                            ></video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        </div>
+                        <!-- 视频2: 刮胡刀.mp4 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <video 
+                                id="video-1"
+                                src="刮胡刀.mp4" 
+                                class="w-full h-full object-cover"
+                                muted
+                                loop
+                                playsinline
+                            ></video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        </div>
+                        <!-- 视频3: 蓝鼠标.mp4 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <video 
+                                id="video-2"
+                                src="蓝鼠标.mp4" 
+                                class="w-full h-full object-cover"
+                                muted
+                                loop
+                                playsinline
+                            ></video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        </div>
+                        <!-- 视频4: 手机.mp4 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <video 
+                                id="video-3"
+                                src="手机.mp4" 
+                                class="w-full h-full object-cover"
+                                muted
+                                loop
+                                playsinline
+                            ></video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        </div>
+                        <!-- 视频5: 鼠标.mp4 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <video 
+                                id="video-4"
+                                src="鼠标.mp4" 
+                                class="w-full h-full object-cover"
+                                muted
+                                loop
+                                playsinline
+                            ></video>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 左右控制按钮 -->
+                    <button id="video-prev" class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/10 hover:border-[var(--accent-cyan)] flex items-center justify-center text-white transition-all duration-300 z-10 opacity-0 group-hover/video-carousel:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-lg"></i>
+                    </button>
+                    <button id="video-next" class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/10 hover:border-[var(--accent-cyan)] flex items-center justify-center text-white transition-all duration-300 z-10 opacity-0 group-hover/video-carousel:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-lg"></i>
+                    </button>
+                    
+                    <!-- 指示器 -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+                        <button class="video-indicator w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300 active:bg-[var(--accent-cyan)]"></button>
+                        <button class="video-indicator w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300"></button>
+                        <button class="video-indicator w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300"></button>
+                        <button class="video-indicator w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300"></button>
+                        <button class="video-indicator w-2 h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3个精选作品 16:9 交互式轮播图 -->
+            <div class="reveal mt-12 mb-16">
+                <!-- 容器设为严格的 aspect-[16/9] 宽高比 -->
+                <div class="relative w-full mx-auto overflow-hidden rounded-2xl border border-[var(--border-color)] bg-black/40 backdrop-blur-md shadow-2xl group/carousel aspect-[16/9]">
+                    <!-- 轮播滚动轨道 设为 h-full 填满外壳 -->
+                    <div id="carousel-track" class="flex h-full transition-transform duration-700 cubic-bezier(0.16, 1, 0.3, 1) will-change-transform" style="transform: translateX(0%);">
+                        
+                        <!-- Slide 1 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <img src="1.jpeg" 
+                                 alt="SYBYL 顶奢金色无线降噪耳机" 
+                                 class="w-full h-full object-cover opacity-80 select-none bg-zinc-950">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent flex flex-col justify-end p-6 md:p-12">
+                                <span class="text-xs font-mono text-[var(--accent-cyan)] uppercase tracking-[0.2em] mb-1">PROJECT 01</span>
+                                <h3 class="text-xl md:text-4xl font-black text-white tracking-wide">SYBYL 顶奢金色无线降噪耳机</h3>
+                                <p class="text-xs md:text-base text-[var(--secondary-text)] mt-1 md:mt-2">奢华沙漠流光质感 · 欧美中产受众极简视觉陈列</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 2 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <img src="2.jpeg" 
+                                 alt="SNEAKERDUST 机能风运动鞋全案" 
+                                 class="w-full h-full object-cover opacity-80 select-none bg-zinc-950">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent flex flex-col justify-end p-6 md:p-12">
+                                <span class="text-xs font-mono text-[var(--accent-cyan)] uppercase tracking-[0.2em] mb-1">PROJECT 02</span>
+                                <h3 class="text-xl md:text-4xl font-black text-white tracking-wide">SNEAKERDUST 机能风运动鞋全案</h3>
+                                <p class="text-xs md:text-base text-[var(--secondary-text)] mt-1 md:mt-2">暗黑机能美学 · 烟雾特效与碳纤维纹理极致呈现</p>
+                            </div>
+                        </div>
+
+                        <!-- Slide 3 -->
+                        <div class="w-full h-full flex-shrink-0 relative">
+                            <img src="3.jpeg" 
+                                 alt="M9PRO Max 游戏鼠标全案" 
+                                 class="w-full h-full object-cover opacity-80 select-none bg-zinc-950">
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-transparent flex flex-col justify-end p-6 md:p-12">
+                                <span class="text-xs font-mono text-[var(--accent-cyan)] uppercase tracking-[0.2em] mb-1">PROJECT 03</span>
+                                <h3 class="text-xl md:text-4xl font-black text-white tracking-wide">M9PRO Max 游戏鼠标全案</h3>
+                                <p class="text-xs md:text-base text-[var(--secondary-text)] mt-1 md:mt-2">电竞机能风重塑 · 极致参数与轻量化核心卖点全拆解</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 左右方向控制按钮 -->
+                    <button id="prev-slide" class="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/10 hover:border-[var(--accent-cyan)] flex items-center justify-center text-white transition-all duration-300 z-10 hover:scale-110 opacity-0 group-hover/carousel:opacity-100">
+                        <i class="fa-solid fa-chevron-left text-lg"></i>
+                    </button>
+                    <button id="next-slide" class="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/10 hover:border-[var(--accent-cyan)] flex items-center justify-center text-white transition-all duration-300 z-10 hover:scale-110 opacity-0 group-hover/carousel:opacity-100">
+                        <i class="fa-solid fa-chevron-right text-lg"></i>
+                    </button>
+
+                    <!-- 底部动态圆点指示器 -->
+                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-10">
+                        <button class="carousel-dot h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300" data-index="0" style="width: 24px; background-color: rgb(255, 255, 255);"></button>
+                        <button class="carousel-dot h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300" data-index="1" style="width: 10px;"></button>
+                        <button class="carousel-dot h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300" data-index="2" style="width: 10px;"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主打选框卡片 1 (M9PRO Max 游戏鼠标全案) -->
+            <div id="portfolio-image" class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+                <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                    <img src="画板 1.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1200&auto=format&fit=crop';" 
+                         alt="M9PRO Max 游戏鼠标全案" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]">
+                </div>
+                <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
+                        <h3 class="text-2xl font-bold text-white mt-1">M9PRO Max | 极致轻量化电竞鼠标全案</h3>
+                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                            44g超轻机身搭配TTC金微动，100M次点击寿命。以红黑电竞机能美学为核心，拆解产品硬核参数，打造极具视觉冲击力的亚马逊Listing视觉方案。
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono px-3 py-1.5 bg-cyan-500/10 text-[var(--accent-cyan)] border border-cyan-500/20 rounded-md whitespace-nowrap self-start md:self-center">Gaming Gear</span>
+                </div>
+            </div>
+
+            <!-- 主打选框卡片 2 (画板 2 - XIAO ZHANG) -->
+            <div class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+                <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                    <img src="画板 2.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1484704849700-f032a568e944?q=80&w=1200&auto=format&fit=crop';" 
+                         alt="XIAO ZHANG 高保真无线耳机全案" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]">
+                </div>
+                <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
+                        <h3 class="text-2xl font-bold text-white mt-1">XIAO ZHANG | 高保真无线耳机全案包装</h3>
+                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                            全案深度剖析声学动力。运用音轨多维度科技声学结构拆解、13mm 发音单元透射渲染、高品质欧美 Lifestyle 通勤场景。在极为严谨的欧美现代审美框架下实现亚马逊高溢价转化认同。
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono px-3 py-1.5 bg-cyan-500/10 text-[var(--accent-cyan)] border border-cyan-500/20 rounded-md whitespace-nowrap self-start md:self-center">Acoustic Tech</span>
+                </div>
+            </div>
+
+            <!-- 主打选框卡片 3 (画板 3 - AQUILA) -->
+            <div class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+                <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                    <img src="画板 3.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1200&auto=format&fit=crop';" 
+                         alt="AQUILA 智能高速手持涡轮风扇" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]">
+                </div>
+                <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
+                        <h3 class="text-2xl font-bold text-white mt-1">AQUILA | 智能高速手持涡轮风扇全案设计</h3>
+                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                            极简黑白高级冷冽质感。聚焦 10m/s 强风道空气动力学、100 档无级调节及 30 小时超长续航等三大爆发性核心痛点，辅以多用途全场景实拍，营造最具质感的现代家电科技调性。
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono px-3 py-1.5 bg-cyan-500/10 text-[var(--accent-cyan)] border border-cyan-500/20 rounded-md whitespace-nowrap self-start md:self-center">Home Tech</span>
+                </div>
+            </div>
+
+            <!-- 主打选框卡片 4 (画板 4 - APEX) -->
+            <div class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+                <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                    <img src="画板 4.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1600080972464-8e5f35f63d08?q=80&w=1200&auto=format&fit=crop';" 
+                         alt="APEX 游戏手柄全案" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]">
+                </div>
+                <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
+                        <h3 class="text-2xl font-bold text-white mt-1">APEX | 极客专业竞赛游戏手柄全案包装</h3>
+                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                            深度打磨欧美硬核极客电竞风格。完美整合手柄多角度精细质修、高分子材质防滑特写、全竞技配件精美解剖罗列及 1500 万次按键弹力测试数据呈现，赋予品牌极强的专业科技心智。
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono px-3 py-1.5 bg-cyan-500/10 text-[var(--accent-cyan)] border border-cyan-500/20 rounded-md whitespace-nowrap self-start md:self-center">Gaming Gear</span>
+                </div>
+            </div>
+
+            <!-- 主打选框卡片 5 (画板 5 - XIAOF9J) -->
+            <div class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+                <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                    <img src="画板 5.jpg" 
+                         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=1200&auto=format&fit=crop';" 
+                         alt="XIAOF9J 快充编织线缆系列" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]">
+                </div>
+                <div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
+                        <h3 class="text-2xl font-bold text-white mt-1">XIAOF9J | 100W高分子精编合金充电线缆</h3>
+                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                            极致光影下的微距金属表现。全景呈现高柔韧合金线缆、10000+次防折弯断裂极限实验测试、智能温控快充抗氧化芯片结构透射，打造具有顶级品质感的3C类目硬核解剖图。
+                        </p>
+                    </div>
+                    <span class="text-xs font-mono px-3 py-1.5 bg-cyan-500/10 text-[var(--accent-cyan)] border border-cyan-500/20 rounded-md whitespace-nowrap self-start md:self-center">Accessories</span>
+                </div>
+            </div>
+
+            <!-- 精选单项作品画廊网格 (双列展示) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- 卡片 1: SYBYL 钛合金蓝牙耳机全案 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="蓝牙耳机 (1).jpeg" 
+                             alt="SYBYL 钛合金蓝牙耳机" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Project Series</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 钛合金蓝牙耳机全案</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">沙漠流光质感渲染，钛合金材质与高端音频技术的完美融合，打造顶奢无线耳机视觉方案。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 2: 蓝牙耳机内部结构可视化 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="蓝牙耳机 (2).jpeg" 
+                             alt="SYBYL 蓝牙耳机内部结构" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Technical Visualization</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 蓝牙耳机内部结构可视化</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">Cinematic级声学腔体透视渲染，DSP模块与驱动单元的科技感呈现，打造专业技术视觉方案。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第二组双列卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- 卡片 3: 蓝牙耳机触感特写 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="蓝牙耳机 (3).jpeg" 
+                             alt="蓝牙耳机触感特写" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Product Detail</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 蓝牙耳机触感特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">微距镜头下的细腻触感呈现，展现产品的精致工艺与高品质材质，激发用户购买欲望。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 4: 蓝牙耳机佩戴场景 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="蓝牙耳机 (4).jpeg" 
+                             alt="蓝牙耳机佩戴场景" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Lifestyle</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 都市精英佩戴场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">都市夜景下的精英佩戴场景，展现产品的时尚感与科技感，精准定位高端消费人群。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第三组双列卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- 卡片 5: 鼠标碳纤维侧视图 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="鼠标 (1).jpeg" 
+                             alt="碳纤维游戏鼠标" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Ergonomic Design</span>
+                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 碳纤维侧视图</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">流线型人体工学设计，碳纤维纹理质感呈现，打造极致电竞外设视觉。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 6: 鼠标正面特写 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="鼠标 (1).png" 
+                             alt="鼠标正面特写" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Product Detail</span>
+                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 正面特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">细节质感呈现，滚轮灯光效果与按键布局的专业展示，突出产品品质感。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第四组双列卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- 卡片 7: 电竞桌面场景 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="鼠标 (2).jpeg" 
+                             alt="电竞桌面场景" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Lifestyle</span>
+                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 电竞桌面场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">高端电竞外设套装展示，沉浸式游戏环境营造，展现产品使用场景与氛围感。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 8: 鼠标低角度侧视图 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="鼠标 (3).jpeg" 
+                             alt="鼠标低角度侧视图" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Product Shot</span>
+                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 低角度侧视图</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">低角度视觉呈现，突出产品的流线型设计与碳纤维纹理，营造专业电竞氛围。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第五组双列卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- 卡片 9: 机能运动鞋细节 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="运动鞋 (1).jpeg" 
+                             alt="机能运动鞋细节" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Fashion Tech</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 机能细节特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">战术绑带系统与碳纤维纹理的极致呈现，暗黑机能美学的完美诠释。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 10: 实验室场景 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="运动鞋 (2).jpeg" 
+                             alt="实验室场景" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Concept Lab</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 真空测试实验室</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">工业风实验室场景，烟雾特效与悬浮运动鞋的视觉冲击，展现产品科技感。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 第六组双列卡片 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+                <!-- 卡片 11: 地面烟雾效果 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="运动鞋 (3).jpeg" 
+                             alt="地面烟雾效果" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Cinematic</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 地面烟雾场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">破碎地面与烟雾环绕的戏剧化场景，突显产品的力量感与神秘感。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 12: 悬浮发光效果 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="运动鞋 (4).jpeg" 
+                             alt="悬浮发光效果" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-6 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Glow Effect</span>
+                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 发光悬浮效果</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">边缘发光效果与动态烟雾的完美结合，打造赛博朋克风格的视觉盛宴。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产品分镜展示 -->
+    <section id="storyboards" class="py-32 px-8 bg-zinc-950/30">
+        <div class="container mx-auto">
+            <div class="mb-20 reveal">
+                <h2 class="text-4xl font-black text-white">产品分镜</h2>
+                <p class="text-[var(--secondary-text)] mt-2">STORYBOARDS / 视觉叙事与创意分镜</p>
+            </div>
+            
+            <!-- 分镜A -->
+            <div class="mb-8">
+                <span class="text-sm font-mono text-[var(--accent-purple)] uppercase tracking-[0.25em] font-bold">STORYBOARD A</span>
+            </div>
+            <!-- 第一组 3x3 卡片 -->
+            <div class="grid grid-cols-3 gap-4 mb-16">
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (1).png" alt="分镜01" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (2).png" alt="分镜02" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (3).png" alt="分镜03" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (4).png" alt="分镜04" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (5).png" alt="分镜05" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (6).png" alt="分镜06" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (7).png" alt="分镜07" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (8).png" alt="分镜08" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
+                    <img src="耳机线稿 (9).png" alt="分镜09" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+            
+            <!-- 分镜B -->
+            <div class="mb-8">
+                <span class="text-sm font-mono text-[var(--accent-cyan)] uppercase tracking-[0.25em] font-bold">STORYBOARD B</span>
+            </div>
+            <!-- 第二组 3x3 卡片 -->
+            <div class="grid grid-cols-3 gap-4 mb-16">
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (1).png" alt="分镜10" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (2).png" alt="分镜11" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (3).png" alt="分镜12" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (4).png" alt="分镜13" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (5).png" alt="分镜14" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (6).png" alt="分镜15" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (7).png" alt="分镜16" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (8).png" alt="分镜17" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
+                    <img src="刮胡刀线稿 (9).png" alt="分镜18" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+            
+            <!-- 分镜C -->
+            <div class="mb-8">
+                <span class="text-sm font-mono text-pink-400 uppercase tracking-[0.25em] font-bold">STORYBOARD C</span>
+            </div>
+            <!-- 第三组 3x3 卡片 -->
+            <div class="grid grid-cols-3 gap-4 mb-16">
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (1).png" alt="分镜19" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (2).png" alt="分镜20" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (3).png" alt="分镜21" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (4).png" alt="分镜22" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (5).png" alt="分镜23" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (6).png" alt="分镜24" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (7).png" alt="分镜25" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (8).png" alt="分镜26" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
+                    <img src="鼠标线稿 (9).png" alt="分镜27" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+            
+            <!-- 分镜D -->
+            <div class="mb-8">
+                <span class="text-sm font-mono text-indigo-400 uppercase tracking-[0.25em] font-bold">STORYBOARD D</span>
+            </div>
+            <!-- 第四组 3x3 卡片 -->
+            <div class="grid grid-cols-3 gap-4">
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (1).png" alt="分镜28" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (2).png" alt="分镜29" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (3).png" alt="分镜30" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (4).png" alt="分镜31" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (5).png" alt="分镜32" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (6).png" alt="分镜33" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (7).png" alt="分镜34" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (8).png" alt="分镜35" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
+                    <img src="蓝鼠标线稿 (9).png" alt="分镜36" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我 -->
+    <section id="about" class="py-32 px-8 border-t border-[var(--border-color)]">
+        <div class="container mx-auto max-w-4xl">
+            <div class="mb-20 reveal">
+                <h2 class="text-4xl font-black text-white">关于我</h2>
+                <p class="text-[var(--secondary-text)] mt-2">ABOUT ME / 专注跨境视觉，赋能卖家成长</p>
+            </div>
+            <div class="flex flex-col md:flex-row gap-12 items-start">
+                <div class="w-full md:w-1/3">
+                    <div class="aspect-square bg-zinc-900 mb-6 grayscale shadow-lg overflow-hidden border border-purple-500/20">
+                        <img src="头像.jpg" alt="设计师" class="w-full h-full object-cover">
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3">
+                    <h3 class="text-3xl md:text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">Hello! 我是逄金鹏</h3>
+                    <p class="text-xl font-bold text-white mb-4">AI 主创设计师</p>
+                    <div class="space-y-6 text-[var(--secondary-text)] leading-relaxed text-base md:text-lg">
+                        <p class="text-white/90 font-medium">
+                            <span class="text-cyan-400 mr-2">//</span>
+                            精通 <span class="text-cyan-300 font-semibold">Photoshop</span>、<span class="text-purple-300 font-semibold">Cinema 4D</span>、<span class="text-pink-300 font-semibold">AI渲染工具</span> 等专业设计软件，具备高效完成各类视觉设计任务的能力。
+                        </p>
+                        <p class="text-white/80">
+                            <span class="text-purple-400 mr-2">//</span>
+                            专注于白底图精修、场景渲染、CGI视觉制作与AI视频创作，为跨境电商提供全方位视觉解决方案。
+                        </p>
+                        <p class="text-white/80">
+                            <span class="text-pink-400 mr-2">//</span>
+                            秉持 "<span class="text-cyan-300 font-semibold">合规为基础，转化为核心</span>" 的设计理念，融合高端渲染调性，助力卖家打造差异化视觉竞争力。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系合作板块 -->
+    <section id="contact" class="py-24 px-8 border-t border-[var(--border-color)]">
+        <div class="container mx-auto">
+            <div class="max-w-4xl mx-auto bg-[#07070d] border border-purple-500/20 shadow-2xl p-12 md:p-20 text-center relative overflow-hidden rounded-md">
+                <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight italic text-white">携手打造<br>跨境爆款视觉</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-center mt-12">
+                    <div class="group cursor-pointer">
+                        <i class="fab fa-weixin text-2xl mb-2 text-[var(--accent-cyan)]"></i>
+                        <p class="font-bold text-white text-lg">18640430531</p>
+                    </div>
+                    <div class="group cursor-pointer">
+                        <i class="fa fa-envelope text-2xl mb-2 text-[var(--accent-purple)]"></i>
+                        <p class="font-bold text-white text-lg">1014098625@qq.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-12 px-8 border-t border-[var(--border-color)] text-center">
+        <div class="text-2xl font-black mb-4 text-white">W.CONCEPT</div>
+        <p class="opacity-40 text-xs tracking-widest">© 2026 Amazon Premium Visual Portfolio.</p>
+    </footer>
+
+    <script>
+        const customCursor = document.getElementById('custom-cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        let mouseX = 0, mouseY = 0, followerX = 0, followerY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX; mouseY = e.clientY;
+            if(customCursor) {
+                customCursor.style.left = mouseX + 'px'; 
+                customCursor.style.top = mouseY + 'px';
+            }
+        });
+
+        function animateFollower() {
+            if(cursorFollower) {
+                followerX += (mouseX - followerX) * 0.15;
+                followerY += (mouseY - followerY) * 0.15;
+                cursorFollower.style.left = followerX + 'px';
+                cursorFollower.style.top = followerY + 'px';
+            }
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (nav) {
+                if (window.pageYOffset > 50) nav.classList.add('nav-scrolled');
+                else nav.classList.remove('nav-scrolled');
+            }
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- 轮播图 (Carousel Slider) 控制逻辑 ---
+        const track = document.getElementById('carousel-track');
+        const prevBtn = document.getElementById('prev-slide');
+        const nextBtn = document.getElementById('next-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        let currentSlideIndex = 0;
+        const totalSlides = 3;
+
+        function updateCarousel() {
+            if (track) {
+                track.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            }
+            dots.forEach((dot, index) => {
+                if (index === currentSlideIndex) {
+                    dot.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+                    dot.style.width = '24px';
+                } else {
+                    dot.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                    dot.style.width = '10px';
+                }
+            });
+        }
+
+        if (prevBtn && nextBtn) {
+            prevBtn.addEventListener('click', () => {
+                currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+                updateCarousel();
+            });
+        }
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                if (!isNaN(index)) {
+                    currentSlideIndex = index;
+                    updateCarousel();
+                }
+            });
+        });
+
+        // 设定 5s 自动无缝轮播
+        let autoPlayInterval = setInterval(() => {
+            currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+            updateCarousel();
+        }, 5000);
+
+        // 鼠标悬停暂停自动轮播
+        const carouselContainer = track ? track.parentElement : null;
+        if (carouselContainer) {
+            carouselContainer.addEventListener('mouseenter', () => clearInterval(autoPlayInterval));
+            carouselContainer.addEventListener('mouseleave', () => {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = setInterval(() => {
+                    currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
+                    updateCarousel();
+                }, 5000);
+            });
+        }
+
+        // --- 作品集分类筛选跳转 ---
+        const categoryTags = document.querySelectorAll('.category-tag');
+        
+        categoryTags.forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                // 移除所有标签的active状态
+                categoryTags.forEach(t => t.classList.remove('active'));
+                // 添加当前标签的active状态
+                e.target.classList.add('active');
+                
+                const filter = e.target.getAttribute('data-filter');
+                
+                if (filter === 'video') {
+                    // 跳转到视频区域
+                    const videoSection = document.getElementById('portfolio-video');
+                    if (videoSection) {
+                        videoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else if (filter === 'image') {
+                    // 跳转到M9PRO Max图片区域
+                    const imageSection = document.getElementById('portfolio-image');
+                    if (imageSection) {
+                        imageSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else if (filter === 'storyboard') {
+                        // 跳转到产品分镜区域
+                        const storyboardSection = document.getElementById('storyboards');
+                        if (storyboardSection) {
+                            storyboardSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    } else {
+                    // 全部：跳转到作品集顶部
+                    const portfolioSection = document.getElementById('portfolio');
+                    if (portfolioSection) {
+                        portfolioSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // --- 视频轮播控制逻辑 ---
+        const videoTrack = document.getElementById('video-carousel-track');
+        const videoPrevBtn = document.getElementById('video-prev');
+        const videoNextBtn = document.getElementById('video-next');
+        const videoIndicators = document.querySelectorAll('.video-indicator');
+        let currentVideoIndex = 0;
+        const totalVideos = 5;
+
+        // 获取所有视频元素
+        const videos = [];
+        for (let i = 0; i < totalVideos; i++) {
+            videos.push(document.getElementById(`video-${i}`));
+        }
+
+        function updateVideoCarousel() {
+            if (videoTrack) {
+                videoTrack.style.transform = `translateX(-${currentVideoIndex * 100}%)`;
+            }
+            
+            // 暂停所有视频，然后播放当前视频
+            videos.forEach((video, index) => {
+                if (video) {
+                    if (index === currentVideoIndex) {
+                        video.play().catch(() => {}); // 忽略自动播放限制错误
+                    } else {
+                        video.pause();
+                        video.currentTime = 0; // 重置到开头
+                    }
+                }
+            });
+            
+            // 更新指示器
+            videoIndicators.forEach((indicator, index) => {
+                if (index === currentVideoIndex) {
+                    indicator.style.backgroundColor = 'var(--accent-cyan)';
+                    indicator.style.width = '24px';
+                } else {
+                    indicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                    indicator.style.width = '10px';
+                }
+            });
+        }
+
+        if (videoPrevBtn && videoNextBtn) {
+            videoPrevBtn.addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex - 1 + totalVideos) % totalVideos;
+                updateVideoCarousel();
+            });
+
+            videoNextBtn.addEventListener('click', () => {
+                currentVideoIndex = (currentVideoIndex + 1) % totalVideos;
+                updateVideoCarousel();
+            });
+        }
+
+        videoIndicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentVideoIndex = index;
+                updateVideoCarousel();
+            });
+        });
+
+        // 视频轮播自动播放
+        let videoAutoPlayInterval = setInterval(() => {
+            currentVideoIndex = (currentVideoIndex + 1) % totalVideos;
+            updateVideoCarousel();
+        }, 4000);
+
+        // 鼠标悬停暂停视频轮播
+        const videoContainer = videoTrack ? videoTrack.parentElement : null;
+        if (videoContainer) {
+            videoContainer.addEventListener('mouseenter', () => clearInterval(videoAutoPlayInterval));
+            videoContainer.addEventListener('mouseleave', () => {
+                clearInterval(videoAutoPlayInterval);
+                videoAutoPlayInterval = setInterval(() => {
+                    currentVideoIndex = (currentVideoIndex + 1) % totalVideos;
+                    updateVideoCarousel();
+                }, 4000);
+            });
+        }
+
+        // --- 主题切换逻辑 ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const htmlElement = document.querySelector('html');
+
+        function toggleTheme() {
+            if (htmlElement.classList.contains('dark')) {
+                // 切换到白天模式
+                htmlElement.classList.remove('dark');
+                htmlElement.classList.add('light');
+                document.body.classList.add('light-mode');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            } else {
+                // 切换到夜晚模式
+                htmlElement.classList.remove('light');
+                htmlElement.classList.add('dark');
+                document.body.classList.remove('light-mode');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // 初始化主题
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        if (savedTheme === 'light') {
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+            document.body.classList.add('light-mode');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+
+        // 添加点击事件
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // --- 粒子系统与鼠标交互 ---
+        const particlesContainer = document.getElementById('particles-container');
+        const perspectiveGrid = document.querySelector('.perspective-grid');
+        const glowingBlobs = document.querySelectorAll('.glowing-blob');
+        
+        // 创建粒子
+        function createParticles(count = 20) {
+            if (!particlesContainer) return;
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // 随机位置
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // 随机大小和透明度
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.opacity = Math.random() * 0.4 + 0.2;
+                
+                // 随机延迟动画
+                particle.style.transitionDelay = Math.random() * 0.5 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // 初始化粒子
+        createParticles(25);
+        
+        // 鼠标移动时粒子跟随效果
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX;
+            const mouseY = e.clientY;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
+            
+            // 粒子跟随效果
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach((particle, index) => {
+                const particleX = parseFloat(particle.style.left) * windowWidth / 100;
+                const particleY = parseFloat(particle.style.top) * windowHeight / 100;
+                
+                const dx = mouseX - particleX;
+                const dy = mouseY - particleY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // 距离越近，影响越大
+                if (distance < 300) {
+                    const influence = 1 - distance / 300;
+                    const moveX = dx * influence * 0.02;
+                    const moveY = dy * influence * 0.02;
+                    
+                    particle.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                    particle.style.opacity = 0.2 + influence * 0.6;
+                } else {
+                    particle.style.transform = 'translate(0, 0)';
+                    particle.style.opacity = 0.3;
+                }
+            });
+            
+            // 透视网格轻微跟随
+            if (perspectiveGrid) {
+                const offsetX = (mouseX - windowWidth / 2) * 0.005;
+                const offsetY = (mouseY - windowHeight / 2) * 0.003;
+                perspectiveGrid.style.transform = `perspective(500px) rotateX(60deg) translate(${offsetX}px, ${offsetY}px)`;
+            }
+            
+            // 发光blob轻微跟随
+            glowingBlobs.forEach((blob, index) => {
+                const delay = index * 0.1;
+                const moveX = (mouseX - windowWidth / 2) * 0.003 * (index % 2 === 0 ? 1 : -1);
+                const moveY = (mouseY - windowHeight / 2) * 0.003 * (index % 2 === 0 ? -1 : 1);
+                blob.style.transform = `translate(${moveX}px, ${moveY}px)`;
+            });
+        });
+        
+        // 鼠标离开时重置
+        document.addEventListener('mouseleave', () => {
+            const particles = document.querySelectorAll('.particle');
+            particles.forEach(particle => {
+                particle.style.transform = 'translate(0, 0)';
+                particle.style.opacity = 0.3;
+            });
+            
+            if (perspectiveGrid) {
+                perspectiveGrid.style.transform = 'perspective(500px) rotateX(60deg)';
+            }
+            
+            glowingBlobs.forEach(blob => {
+                blob.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // --- 视频播放控制 ---
+        const video = document.getElementById('showcase-video');
+        const videoToggle = document.getElementById('video-toggle');
+        
+        if (video && videoToggle) {
+            videoToggle.addEventListener('click', () => {
+                if (video.paused) {
+                    video.play();
+                    videoToggle.innerHTML = '<i class="fa-solid fa-pause text-xl"></i>';
+                    videoToggle.classList.add('bg-white/20');
+                } else {
+                    video.pause();
+                    videoToggle.innerHTML = '<i class="fa-solid fa-play text-xl ml-1"></i>';
+                    videoToggle.classList.remove('bg-white/20');
+                }
+            });
+            
+            // 视频播放完成后重置按钮
+            video.addEventListener('ended', () => {
+                videoToggle.innerHTML = '<i class="fa-solid fa-play text-xl ml-1"></i>';
+                videoToggle.classList.remove('bg-white/20');
+            });
+        }
+    </script>
+</body>
+</html>
