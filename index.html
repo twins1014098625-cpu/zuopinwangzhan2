@@ -88,7 +88,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', PingFang SC, Microsoft YaHei, -apple-system, BlinkMacSystemFont, sans-serif;
             background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
             background-color: var(--bg-color);
             background-image: 
@@ -372,8 +372,8 @@
         }
         .btn-cyber:hover {
             border-color: var(--accent-cyan);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4), 0 10px 40px rgba(148, 0, 211, 0.2);
+            transform: translateY(-6px);
         }
 
         .category-tag {
@@ -396,13 +396,14 @@
         .portfolio-gallery-card {
             background: rgba(255, 255, 255, 0.01);
             border: 1px solid var(--border-color);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
         }
         .portfolio-gallery-card:hover {
             border-color: var(--accent-cyan);
-            background: rgba(0, 255, 255, 0.02);
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 255, 255, 0.08);
+            background: rgba(0, 255, 255, 0.03);
+            transform: translateY(-12px) scale(1.01);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.12), 0 0 20px rgba(148, 0, 211, 0.05);
         }
 
         @media (max-width: 768px) {
@@ -474,7 +475,7 @@
             </svg>
         </div>
         
-        <div class="container mx-auto grid md:grid-cols-2 gap-12 items-center relative z-10">
+        <div class="container mx-auto px-6 md:px-16 lg:px-24 grid md:grid-cols-2 gap-12 items-center relative z-10">
             <div class="reveal">
                 <h1 class="text-4xl md:text-6xl font-black leading-none mb-8 text-white">
                     ADDICTED <br>
@@ -503,7 +504,7 @@
     <!-- 服务项目板块 -->
     <section id="services" class="py-32 px-8 relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-zinc-950/10 to-zinc-950/30"></div>
-        <div class="container mx-auto relative z-10">
+        <div class="container mx-auto px-6 md:px-16 lg:px-24 relative z-10">
             <div class="mb-20 reveal">
                 <h2 class="text-4xl font-black text-white">服务项目</h2>
                 <p class="text-[var(--secondary-text)] mt-2">SERVICES / 跨境视觉解决方案</p>
@@ -530,9 +531,9 @@
     </section>
 
     <!-- 作品集板块 -->
-    <section id="portfolio" class="py-32 px-0 border-t border-[var(--border-color)]">
-        <div class="container mx-auto px-4 md:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 reveal">
+    <section id="portfolio" class="py-40 px-0 border-t border-[var(--border-color)]">
+        <div class="container mx-auto px-6 md:px-16 lg:px-24">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 reveal">
                 <div>
                     <h2 class="text-4xl font-black text-white">作品集</h2>
                     <p class="text-[var(--secondary-text)] mt-2">PORTFOLIO / 跨境视觉落地案例</p>
@@ -540,7 +541,8 @@
                 <div class="mt-8 md:mt-0 flex gap-3">
                     <span class="category-tag active" data-filter="all">全部</span>
                     <span class="category-tag" data-filter="video">产品视频</span>
-                    <span class="category-tag" data-filter="image">产品图片</span>
+                    <span class="category-tag" data-filter="image">产品主图</span>
+                    <span class="category-tag" data-filter="secondary">产品副图</span>
                     <span class="category-tag" data-filter="storyboard">产品分镜</span>
                 </div>
             </div>
@@ -691,10 +693,17 @@
                         <button class="carousel-dot h-2 rounded-full bg-white/30 hover:bg-white/60 transition-all duration-300" data-index="2" style="width: 10px;"></button>
                     </div>
                 </div>
+
+            </div>
+
+            <!-- 产品主图标题 -->
+            <div class="mb-12 reveal">
+                <h2 class="text-3xl font-black text-white">产品主图</h2>
+                <p class="text-[var(--secondary-text)] mt-2">MAIN IMAGES / 精选主打案例展示</p>
             </div>
 
             <!-- 主打选框卡片 1 (M9PRO Max 游戏鼠标全案) -->
-            <div id="portfolio-image" class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+            <div id="portfolio-image" class="portfolio-gallery-card rounded-2xl p-6 mb-20 reveal group overflow-hidden">
                 <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                     <img src="画板 1.jpg" 
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?q=80&w=1200&auto=format&fit=crop';" 
@@ -705,7 +714,7 @@
                     <div>
                         <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
                         <h3 class="text-2xl font-bold text-white mt-1">M9PRO Max | 极致轻量化电竞鼠标全案</h3>
-                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                        <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">
                             44g超轻机身搭配TTC金微动，100M次点击寿命。以红黑电竞机能美学为核心，拆解产品硬核参数，打造极具视觉冲击力的亚马逊Listing视觉方案。
                         </p>
                     </div>
@@ -725,7 +734,7 @@
                     <div>
                         <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
                         <h3 class="text-2xl font-bold text-white mt-1">XIAO ZHANG | 高保真无线耳机全案包装</h3>
-                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                        <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">
                             全案深度剖析声学动力。运用音轨多维度科技声学结构拆解、13mm 发音单元透射渲染、高品质欧美 Lifestyle 通勤场景。在极为严谨的欧美现代审美框架下实现亚马逊高溢价转化认同。
                         </p>
                     </div>
@@ -745,7 +754,7 @@
                     <div>
                         <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
                         <h3 class="text-2xl font-bold text-white mt-1">AQUILA | 智能高速手持涡轮风扇全案设计</h3>
-                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                        <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">
                             极简黑白高级冷冽质感。聚焦 10m/s 强风道空气动力学、100 档无级调节及 30 小时超长续航等三大爆发性核心痛点，辅以多用途全场景实拍，营造最具质感的现代家电科技调性。
                         </p>
                     </div>
@@ -765,7 +774,7 @@
                     <div>
                         <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
                         <h3 class="text-2xl font-bold text-white mt-1">APEX | 极客专业竞赛游戏手柄全案包装</h3>
-                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                        <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">
                             深度打磨欧美硬核极客电竞风格。完美整合手柄多角度精细质修、高分子材质防滑特写、全竞技配件精美解剖罗列及 1500 万次按键弹力测试数据呈现，赋予品牌极强的专业科技心智。
                         </p>
                     </div>
@@ -774,7 +783,7 @@
             </div>
 
             <!-- 主打选框卡片 5 (画板 5 - XIAOF9J) -->
-            <div class="portfolio-gallery-card rounded-2xl p-6 mb-12 reveal group overflow-hidden">
+            <div class="portfolio-gallery-card rounded-2xl p-6 mb-20 reveal group overflow-hidden">
                 <div class="aspect-[21/9] md:aspect-[21/9] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                     <img src="画板 5.jpg" 
                          onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1563206767-5b18f218e8de?q=80&w=1200&auto=format&fit=crop';" 
@@ -785,7 +794,7 @@
                     <div>
                         <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Highlight Showcase</span>
                         <h3 class="text-2xl font-bold text-white mt-1">XIAOF9J | 100W高分子精编合金充电线缆</h3>
-                        <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">
+                        <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">
                             极致光影下的微距金属表现。全景呈现高柔韧合金线缆、10000+次防折弯断裂极限实验测试、智能温控快充抗氧化芯片结构透射，打造具有顶级品质感的3C类目硬核解剖图。
                         </p>
                     </div>
@@ -793,211 +802,329 @@
                 </div>
             </div>
 
-            <!-- 精选单项作品画廊网格 (双列展示) -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+            <!-- 产品副图标题 -->
+            <div id="secondary-images" class="mb-12 reveal">
+                <h2 class="text-3xl font-black text-white">产品副图</h2>
+                <p class="text-[var(--secondary-text)] mt-2">SECONDARY IMAGES / 产品细节与场景展示</p>
+            </div>
+
+            <!-- 精选单项作品画廊网格 (2×6布局) -->
+            <div class="grid grid-cols-2 gap-8 grid-auto-rows-1fr reveal mb-16">
                 <!-- 卡片 1: SYBYL 钛合金蓝牙耳机全案 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="蓝牙耳机 (1).jpeg" 
                              alt="SYBYL 钛合金蓝牙耳机" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Project Series</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 钛合金蓝牙耳机全案</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">沙漠流光质感渲染，钛合金材质与高端音频技术的完美融合，打造顶奢无线耳机视觉方案。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SYBYL 钛合金蓝牙耳机全案</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">沙漠流光质感渲染，钛合金材质与高端音频技术的完美融合，打造顶奢无线耳机视觉方案。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 卡片 2: 蓝牙耳机内部结构可视化 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="蓝牙耳机 (2).jpeg" 
                              alt="SYBYL 蓝牙耳机内部结构" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Technical Visualization</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 蓝牙耳机内部结构可视化</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">Cinematic级声学腔体透视渲染，DSP模块与驱动单元的科技感呈现，打造专业技术视觉方案。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SYBYL 蓝牙耳机内部结构可视化</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">Cinematic级声学腔体透视渲染，DSP模块与驱动单元的科技感呈现，打造专业技术视觉方案。</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 第二组双列卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
                 <!-- 卡片 3: 蓝牙耳机触感特写 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="蓝牙耳机 (3).jpeg" 
                              alt="蓝牙耳机触感特写" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Product Detail</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 蓝牙耳机触感特写</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">微距镜头下的细腻触感呈现，展现产品的精致工艺与高品质材质，激发用户购买欲望。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SYBYL 蓝牙耳机触感特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">微距镜头下的细腻触感呈现，展现产品的精致工艺与高品质材质，激发用户购买欲望。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 卡片 4: 蓝牙耳机佩戴场景 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="蓝牙耳机 (4).jpeg" 
                              alt="蓝牙耳机佩戴场景" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Lifestyle</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SYBYL 都市精英佩戴场景</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">都市夜景下的精英佩戴场景，展现产品的时尚感与科技感，精准定位高端消费人群。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SYBYL 都市精英佩戴场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">都市夜景下的精英佩戴场景，展现产品的时尚感与科技感，精准定位高端消费人群。</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 第三组双列卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
                 <!-- 卡片 5: 鼠标碳纤维侧视图 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="鼠标 (1).jpeg" 
                              alt="碳纤维游戏鼠标" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Ergonomic Design</span>
-                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 碳纤维侧视图</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">流线型人体工学设计，碳纤维纹理质感呈现，打造极致电竞外设视觉。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">M9PRO Max 碳纤维侧视图</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">流线型人体工学设计，碳纤维纹理质感呈现，打造极致电竞外设视觉。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 卡片 6: 鼠标正面特写 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="鼠标 (1).png" 
                              alt="鼠标正面特写" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Product Detail</span>
-                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 正面特写</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">细节质感呈现，滚轮灯光效果与按键布局的专业展示，突出产品品质感。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">M9PRO Max 正面特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">细节质感呈现，滚轮灯光效果与按键布局的专业展示，突出产品品质感。</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 第四组双列卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
                 <!-- 卡片 7: 电竞桌面场景 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="鼠标 (2).jpeg" 
                              alt="电竞桌面场景" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Lifestyle</span>
-                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 电竞桌面场景</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">高端电竞外设套装展示，沉浸式游戏环境营造，展现产品使用场景与氛围感。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">M9PRO Max 电竞桌面场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">高端电竞外设套装展示，沉浸式游戏环境营造，展现产品使用场景与氛围感。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 卡片 8: 鼠标低角度侧视图 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="鼠标 (3).jpeg" 
                              alt="鼠标低角度侧视图" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Product Shot</span>
-                            <h3 class="text-xl font-bold text-white mt-1">M9PRO Max 低角度侧视图</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">低角度视觉呈现，突出产品的流线型设计与碳纤维纹理，营造专业电竞氛围。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">M9PRO Max 低角度侧视图</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">低角度视觉呈现，突出产品的流线型设计与碳纤维纹理，营造专业电竞氛围。</p>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- 第五组双列卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
                 <!-- 卡片 9: 机能运动鞋细节 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="运动鞋 (1).jpeg" 
                              alt="机能运动鞋细节" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Fashion Tech</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 机能细节特写</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">战术绑带系统与碳纤维纹理的极致呈现，暗黑机能美学的完美诠释。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SNEAKERDUST 机能细节特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">战术绑带系统与碳纤维纹理的极致呈现，暗黑机能美学的完美诠释。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 卡片 10: 实验室场景 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="运动鞋 (2).jpeg" 
                              alt="实验室场景" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Concept Lab</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 真空测试实验室</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">工业风实验室场景，烟雾特效与悬浮运动鞋的视觉冲击，展现产品科技感。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SNEAKERDUST 真空测试实验室</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">工业风实验室场景，烟雾特效与悬浮运动鞋的视觉冲击，展现产品科技感。</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- 第六组双列卡片 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
                 <!-- 卡片 11: 地面烟雾效果 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="运动鞋 (3).jpeg" 
                              alt="地面烟雾效果" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Cinematic</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 地面烟雾场景</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">破碎地面与烟雾环绕的戏剧化场景，突显产品的力量感与神秘感。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SNEAKERDUST 地面烟雾场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">破碎地面与烟雾环绕的戏剧化场景，突显产品的力量感与神秘感。</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- 卡片 12: 悬浮发光效果 -->
-                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden">
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
                     <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
                         <img src="运动鞋 (4).jpeg" 
                              alt="悬浮发光效果" 
                              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     </div>
-                    <div class="mt-6 flex justify-between items-start">
+                    <div class="mt-8 flex-1 flex justify-between items-start">
                         <div>
                             <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Glow Effect</span>
-                            <h3 class="text-xl font-bold text-white mt-1">SNEAKERDUST 发光悬浮效果</h3>
-                            <p class="text-xs text-[var(--secondary-text)] mt-2 leading-relaxed">边缘发光效果与动态烟雾的完美结合，打造赛博朋克风格的视觉盛宴。</p>
+                            <h3 class="text-xl font-bold text-white mt-3">SNEAKERDUST 发光悬浮效果</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">边缘发光效果与动态烟雾的完美结合，打造赛博朋克风格的视觉盛宴。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 13: 洗地机整体场景 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="洗地机 (1).jpeg" 
+                             alt="洗地机整体场景" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Floor Cleaner</span>
+                            <h3 class="text-xl font-bold text-white mt-3">洗地机整体场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">现代化洗地机在极简空间中的视觉呈现，科技感十足的家居清洁解决方案。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 14: 滚刷细节特写 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="洗地机 (2).jpeg" 
+                             alt="滚刷细节特写" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Roller Brush</span>
+                            <h3 class="text-xl font-bold text-white mt-3">滚刷细节特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">高密度滚刷设计，蓝光除菌技术，高效清洁每一寸地面。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 15: 手柄操控区 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="洗地机 (3).jpeg" 
+                             alt="手柄操控区" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Handle</span>
+                            <h3 class="text-xl font-bold text-white mt-3">手柄操控区</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">人体工学手柄设计，一键操控，舒适握感与便捷操作的完美结合。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 16: 产品侧面视图 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="洗地机 (4).jpeg" 
+                             alt="产品侧面视图" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Side View</span>
+                            <h3 class="text-xl font-bold text-white mt-3">产品侧面视图</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">真实使用场景的沉浸式体验展示。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 17: 音响沙漠场景 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="音响 (1).jpeg" 
+                             alt="音响沙漠场景" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Sound System</span>
+                            <h3 class="text-xl font-bold text-white mt-3">音响沙漠场景</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">沙漠中的声音艺术，声波可视化呈现，打造沉浸式视听体验。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 18: 音响细节特写 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="音响 (2).jpeg" 
+                             alt="音响细节特写" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Detail</span>
+                            <h3 class="text-xl font-bold text-white mt-3">音响细节特写</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">织物网罩纹理与金属质感的完美融合，细节之处见品质。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 19: 音响光影效果 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="音响 (3).jpeg" 
+                             alt="音响光影效果" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-cyan)] tracking-wider uppercase">Lighting</span>
+                            <h3 class="text-xl font-bold text-white mt-3">音响光影效果</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">环形氛围灯设计，随音乐节奏律动，营造沉浸式听觉空间。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 卡片 20: 音响顶部视图 -->
+                <div class="portfolio-gallery-card rounded-2xl p-6 relative group overflow-hidden flex flex-col">
+                    <div class="aspect-[16/10] overflow-hidden rounded-xl bg-zinc-900/60 relative">
+                        <img src="音响 (4).jpeg" 
+                             alt="音响顶部视图" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    </div>
+                    <div class="mt-8 flex-1 flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-mono text-[var(--accent-purple)] tracking-wider uppercase">Top View</span>
+                            <h3 class="text-xl font-bold text-white mt-3">音响顶部视图</h3>
+                            <p class="text-xs text-[var(--secondary-text)] mt-3 leading-relaxed">极简圆形设计，声波扩散纹理，科技与艺术的完美结合。</p>
                         </div>
                     </div>
                 </div>
@@ -1007,7 +1134,7 @@
 
     <!-- 产品分镜展示 -->
     <section id="storyboards" class="py-32 px-8 bg-zinc-950/30">
-        <div class="container mx-auto">
+        <div class="container mx-auto px-6 md:px-16 lg:px-24">
             <div class="mb-20 reveal">
                 <h2 class="text-4xl font-black text-white">产品分镜</h2>
                 <p class="text-[var(--secondary-text)] mt-2">STORYBOARDS / 视觉叙事与创意分镜</p>
@@ -1156,8 +1283,8 @@
     </section>
 
     <!-- 关于我 -->
-    <section id="about" class="py-32 px-8 border-t border-[var(--border-color)]">
-        <div class="container mx-auto max-w-4xl">
+    <section id="about" class="py-40 px-8 border-t border-[var(--border-color)]">
+        <div class="container mx-auto px-6 md:px-16 lg:px-24 max-w-4xl">
             <div class="mb-20 reveal">
                 <h2 class="text-4xl font-black text-white">关于我</h2>
                 <p class="text-[var(--secondary-text)] mt-2">ABOUT ME / 专注跨境视觉，赋能卖家成长</p>
@@ -1192,7 +1319,7 @@
 
     <!-- 联系合作板块 -->
     <section id="contact" class="py-24 px-8 border-t border-[var(--border-color)]">
-        <div class="container mx-auto">
+        <div class="container mx-auto px-6 md:px-16 lg:px-24">
             <div class="max-w-4xl mx-auto bg-[#07070d] border border-purple-500/20 shadow-2xl p-12 md:p-20 text-center relative overflow-hidden rounded-md">
                 <h2 class="text-4xl md:text-5xl font-black mb-6 leading-tight italic text-white">携手打造<br>跨境爆款视觉</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 text-center mt-12">
@@ -1334,10 +1461,16 @@
                         videoSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     }
                 } else if (filter === 'image') {
-                    // 跳转到M9PRO Max图片区域
+                    // 跳转到产品主图区域
                     const imageSection = document.getElementById('portfolio-image');
                     if (imageSection) {
                         imageSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else if (filter === 'secondary') {
+                    // 跳转到产品副图区域
+                    const secondarySection = document.getElementById('secondary-images');
+                    if (secondarySection) {
+                        secondarySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 } else if (filter === 'storyboard') {
                         // 跳转到产品分镜区域
