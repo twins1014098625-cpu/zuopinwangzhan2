@@ -8,6 +8,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="Hyperspeed.css">
+    <script src="Hyperspeed.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
@@ -179,6 +182,286 @@
 
         .grayscale-on-hover:hover {
             filter: grayscale(0%);
+        }
+
+        /* ========================================
+           逐字跳出动画效果
+           每个字符依次从下方跳出，带有弹性效果
+           ======================================== */
+        .letter-jump {
+            overflow: hidden;
+        }
+
+        .letter-jump span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: jumpIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        /* 为每个字符添加递增的延迟 */
+        .letter-jump span:nth-child(1) { animation-delay: 0s; }
+        .letter-jump span:nth-child(2) { animation-delay: 0.05s; }
+        .letter-jump span:nth-child(3) { animation-delay: 0.1s; }
+        .letter-jump span:nth-child(4) { animation-delay: 0.15s; }
+        .letter-jump span:nth-child(5) { animation-delay: 0.2s; }
+        .letter-jump span:nth-child(6) { animation-delay: 0.25s; }
+        .letter-jump span:nth-child(7) { animation-delay: 0.3s; }
+        .letter-jump span:nth-child(8) { animation-delay: 0.35s; }
+        .letter-jump span:nth-child(9) { animation-delay: 0.4s; }
+        .letter-jump span:nth-child(10) { animation-delay: 0.45s; }
+        .letter-jump span:nth-child(11) { animation-delay: 0.5s; }
+        .letter-jump span:nth-child(12) { animation-delay: 0.55s; }
+        .letter-jump span:nth-child(13) { animation-delay: 0.6s; }
+        .letter-jump span:nth-child(14) { animation-delay: 0.65s; }
+        .letter-jump span:nth-child(15) { animation-delay: 0.7s; }
+
+        /* 跳出动画关键帧 */
+        @keyframes jumpIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1.1);
+            }
+            70% {
+                transform: translateY(5px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* ========================================
+           打字机增强版效果（Dynamic Text Reveal）
+           特点：逐字显示 + 淡入 + 流光闪烁 + 光标震动
+           ======================================== */
+        .typewriter-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .typewriter-text {
+            display: inline;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .typewriter-text::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 100%
+            );
+            animation: flowLight 2s ease-in-out infinite;
+        }
+
+        /* 光标闪烁效果 */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: var(--accent-cyan);
+            animation: cursorBlink 1s ease-in-out infinite, cursorShake 0.5s ease-in-out infinite;
+            margin-left: 2px;
+            vertical-align: text-bottom;
+            box-shadow: 0 0 10px var(--accent-cyan), 0 0 20px var(--accent-cyan);
+        }
+
+        /* 流光动画 */
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: -200% center;
+            }
+            50% {
+                background-position: 200% center;
+            }
+        }
+
+        /* 流动光效 */
+        @keyframes flowLight {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        /* 光标闪烁 */
+        @keyframes cursorBlink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* 光标震动 */
+        @keyframes cursorShake {
+            0%, 100% {
+                transform: translateX(0) translateY(0);
+            }
+            25% {
+                transform: translateX(1px) translateY(-1px);
+            }
+            50% {
+                transform: translateX(-1px) translateY(1px);
+            }
+            75% {
+                transform: translateX(1px) translateY(1px);
+            }
+        }
+
+        /* 打字机逐字显示动画 */
+        @keyframes typewriterReveal {
+            from {
+                clip-path: inset(0 100% 0 0);
+            }
+            to {
+                clip-path: inset(0 0 0 0);
+            }
+        }
+
+        /* 单个字符动画 */
+        .typewriter-text span {
+            display: inline-block;
+            opacity: 0;
+            animation: charFadeIn 0.3s ease-out forwards;
+            animation-delay: calc(var(--char-index) * 0.05s);
+        }
+
+        @keyframes charFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(5px) scale(0.95);
+                filter: blur(2px);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(-2px) scale(1.02);
+                filter: blur(1px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0);
+            }
+        }
+
+        /* ========================================
+           3D晶格球效果（神经网络风格）
+           特点：自转 + 鼠标交互 + 空间变形
+           ======================================== */
+        .geometry-container {
+            position: fixed;
+            top: -150px;
+            right: -150px;
+            width: 400px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 5;
+            perspective: 800px;
+            opacity: 0.6;
+        }
+
+        .lattice-sphere {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: sphereRotate 20s linear infinite;
+        }
+
+        /* 晶格节点 */
+        .lattice-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--accent-cyan), var(--accent-purple));
+            box-shadow: 
+                0 0 20px var(--accent-cyan),
+                0 0 40px var(--accent-purple),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+
+        /* 节点位置 - 正八面体布局 */
+        .lattice-sphere .n1 { top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(80px); }
+        .lattice-sphere .n2 { top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(-80px); }
+        .lattice-sphere .n3 { top: 20%; left: 50%; transform: translate(-50%, -50%) rotateX(-90deg) translateZ(80px); }
+        .lattice-sphere .n4 { top: 80%; left: 50%; transform: translate(-50%, -50%) rotateX(90deg) translateZ(80px); }
+        .lattice-sphere .n5 { top: 50%; left: 20%; transform: translate(-50%, -50%) rotateY(90deg) translateZ(80px); }
+        .lattice-sphere .n6 { top: 50%; left: 80%; transform: translate(-50%, -50%) rotateY(-90deg) translateZ(80px); }
+        /* 中间层节点 */
+        .lattice-sphere .n7 { top: 35%; left: 35%; transform: translate(-50%, -50%) translateZ(40px) rotateY(45deg) rotateX(45deg); }
+        .lattice-sphere .n8 { top: 35%; left: 65%; transform: translate(-50%, -50%) translateZ(40px) rotateY(-45deg) rotateX(45deg); }
+        .lattice-sphere .n9 { top: 65%; left: 35%; transform: translate(-50%, -50%) translateZ(40px) rotateY(45deg) rotateX(-45deg); }
+        .lattice-sphere .n10 { top: 65%; left: 65%; transform: translate(-50%, -50%) translateZ(40px) rotateY(-45deg) rotateX(-45deg); }
+        .lattice-sphere .n11 { top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(0); animation-delay: 0.5s; }
+        .lattice-sphere .n12 { top: 50%; left: 50%; transform: translate(-50%, -50%) translateZ(20px); animation-delay: 1s; }
+
+        /* 连接线 */
+        .lattice-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            top: 50%;
+            background: linear-gradient(90deg, var(--accent-cyan), transparent, var(--accent-purple));
+            opacity: 0.4;
+            transform-origin: center;
+        }
+
+        /* 连接线位置 */
+        .lattice-sphere .l1 { transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) translateZ(40px); height: 120px; }
+        .lattice-sphere .l2 { transform: translate(-50%, -50%) rotateX(60deg) rotateY(0deg) translateZ(40px); height: 120px; }
+        .lattice-sphere .l3 { transform: translate(-50%, -50%) rotateX(-60deg) rotateY(0deg) translateZ(40px); height: 120px; }
+        .lattice-sphere .l4 { transform: translate(-50%, -50%) rotateX(0deg) rotateY(60deg) translateZ(40px); height: 120px; }
+        .lattice-sphere .l5 { transform: translate(-50%, -50%) rotateX(0deg) rotateY(-60deg) translateZ(40px); height: 120px; }
+        .lattice-sphere .l6 { transform: translate(-50%, -50%) rotateX(45deg) rotateY(45deg) translateZ(30px); height: 100px; }
+        .lattice-sphere .l7 { transform: translate(-50%, -50%) rotateX(45deg) rotateY(-45deg) translateZ(30px); height: 100px; }
+        .lattice-sphere .l8 { transform: translate(-50%, -50%) rotateX(-45deg) rotateY(45deg) translateZ(30px); height: 100px; }
+        .lattice-sphere .l9 { transform: translate(-50%, -50%) rotateX(-45deg) rotateY(-45deg) translateZ(30px); height: 100px; }
+        .lattice-sphere .l10 { transform: translate(-50%, -50%) rotateX(90deg) rotateY(0deg) translateZ(0); height: 160px; }
+        .lattice-sphere .l11 { transform: translate(-50%, -50%) rotateY(90deg) rotateX(0deg) translateZ(0); height: 160px; }
+        .lattice-sphere .l12 { transform: translate(-50%, -50%) rotateX(90deg) rotateY(90deg) translateZ(0); height: 160px; }
+
+        /* 节点脉冲动画 */
+        @keyframes nodePulse {
+            0%, 100% {
+                transform: inherit scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: inherit scale(1.3);
+                opacity: 0.8;
+            }
+        }
+
+        /* 球体自转动画 */
+        @keyframes sphereRotate {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
         }
 
         /* ========================================
@@ -1044,6 +1327,41 @@
     </style>
 </head>
 <body class="overflow-x-hidden">
+    <!-- 超高速隧道效果容器 -->
+    <div class="hyperspeed-container" id="hyperspeedContainer"></div>
+    
+    <!-- 3D晶格球容器 -->
+    <div class="geometry-container" id="geometryContainer">
+        <div class="lattice-sphere" id="latticeSphere">
+            <!-- 晶格节点 -->
+            <div class="lattice-node n1"></div>
+            <div class="lattice-node n2"></div>
+            <div class="lattice-node n3"></div>
+            <div class="lattice-node n4"></div>
+            <div class="lattice-node n5"></div>
+            <div class="lattice-node n6"></div>
+            <div class="lattice-node n7"></div>
+            <div class="lattice-node n8"></div>
+            <div class="lattice-node n9"></div>
+            <div class="lattice-node n10"></div>
+            <div class="lattice-node n11"></div>
+            <div class="lattice-node n12"></div>
+            <!-- 连接线 -->
+            <div class="lattice-line l1"></div>
+            <div class="lattice-line l2"></div>
+            <div class="lattice-line l3"></div>
+            <div class="lattice-line l4"></div>
+            <div class="lattice-line l5"></div>
+            <div class="lattice-line l6"></div>
+            <div class="lattice-line l7"></div>
+            <div class="lattice-line l8"></div>
+            <div class="lattice-line l9"></div>
+            <div class="lattice-line l10"></div>
+            <div class="lattice-line l11"></div>
+            <div class="lattice-line l12"></div>
+        </div>
+    </div>
+    
     <!-- 噪点蒙层 -->
     <div class="noise-overlay"></div>
     
@@ -1346,12 +1664,106 @@
             });
         }
         
+        // ========================================
+        // 3D晶格球鼠标交互
+        // ========================================
+        function initLatticeSphere() {
+            const sphere = document.getElementById('latticeSphere');
+            const container = document.getElementById('geometryContainer');
+            
+            document.addEventListener('mousemove', (e) => {
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                // 计算鼠标相对于中心的偏移
+                const offsetX = (e.clientX - centerX) / centerX;
+                const offsetY = (e.clientY - centerY) / centerY;
+                
+                // 根据鼠标位置旋转晶格球
+                const rotateY = offsetX * 30; // 水平移动控制Y轴旋转
+                const rotateX = -offsetY * 30; // 垂直移动控制X轴旋转
+                
+                // 添加平滑过渡
+                sphere.style.transition = 'transform 0.3s cubic-bezier(0.23, 1, 0.32, 1)';
+                sphere.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                
+                // 同时移动整个容器
+                container.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                container.style.transform = `translate(${offsetX * 20}px, ${offsetY * 20}px)`;
+            });
+            
+            // 鼠标离开时恢复原位
+            document.addEventListener('mouseleave', () => {
+                sphere.style.transition = 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)';
+                sphere.style.transform = 'rotateX(0deg) rotateY(0deg)';
+                
+                container.style.transition = 'transform 1s cubic-bezier(0.23, 1, 0.32, 1)';
+                container.style.transform = 'translate(0, 0)';
+            });
+        }
+
+        // ========================================
+        // 打字机增强版效果 - JavaScript初始化
+        // ========================================
+        function initTypewriter() {
+            const typewriterElements = document.querySelectorAll('.typewriter-text');
+            
+            typewriterElements.forEach(element => {
+                const text = element.textContent;
+                element.innerHTML = '';
+                
+                text.split('').forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.style.setProperty('--char-index', index);
+                    span.style.opacity = '0';
+                    span.style.animationDelay = `${index * 50}ms`;
+                    element.appendChild(span);
+                    
+                    // 延迟后添加动画类
+                    setTimeout(() => {
+                        span.style.animation = 'charFadeIn 0.4s cubic-bezier(0.23, 1, 0.32, 1) forwards';
+                    }, index * 50);
+                });
+            });
+        }
+
+        let hyperspeed = null;
+
+        function initHyperspeed() {
+            const container = document.getElementById('hyperspeedContainer');
+            if (container && typeof Hyperspeed !== 'undefined') {
+                hyperspeed = new Hyperspeed(container, {
+                    distortion: 'turbulentDistortion',
+                    length: 400,
+                    roadWidth: 10,
+                    islandWidth: 2,
+                    lanesPerRoad: 4,
+                    fov: 90,
+                    speedUp: 2,
+                    colors: {
+                        roadColor: 0x080808,
+                        islandColor: 0x0a0a0a,
+                        background: 0x000000,
+                        shoulderLines: 0xffffff,
+                        brokenLines: 0xffffff,
+                        leftCars: [0xd856bf, 0x6750a2, 0xc247ac],
+                        rightCars: [0x03b3c3, 0x0e5ea5, 0x324555],
+                        sticks: 0x03b3c3
+                    }
+                });
+            }
+        }
+
         function initEffects() {
             resizeCosmosCanvas();
             resizeKineticCanvas();
             initCosmosParticles();
             initMouseSpotlight();
             initServiceCardEffects();
+            initTypewriter();
+            initLatticeSphere();
+            initHyperspeed();
             
             window.addEventListener('resize', () => {
                 resizeCosmosCanvas();
@@ -1373,6 +1785,8 @@
 
     <!-- 时空光影Canvas -->
     <canvas id="cosmosCanvas"></canvas>
+
+
 
     <!-- 动力学文字效果容器 -->
     <div id="kinetic-text-container" class="kinetic-text-container">
@@ -1468,8 +1882,8 @@
                     <span class="text-outline" style="-webkit-text-stroke: 1px var(--accent-cyan);">TO</span> <br>
                     SUCCESS.
                 </h1>
-                <p class="text-lg text-[var(--secondary-text)] mb-10 max-w-md leading-relaxed border-l-2 border-[var(--accent-purple)] pl-6">
-                    专注国内国外电商视觉全案。通过欧美原生的审美逻辑与数据转化法则，为头部跨境品牌提供极具爆发力的 Listing主副图、旗舰店整店创意设计。
+                <p class="text-lg text-[var(--secondary-text)] mb-10 max-w-md leading-relaxed border-l-2 border-[var(--accent-purple)] pl-6 typewriter-container">
+                    <span class="typewriter-text">专注国内国外电商视觉全案。通过欧美原生的审美逻辑与数据转化法则，为头部跨境品牌提供极具爆发力的 Listing主副图、旗舰店整店创意设计。</span><span class="typewriter-cursor">|</span>
                 </p>
                 
                 <div class="mt-8">
@@ -2360,7 +2774,9 @@
                     </div>
                 </div>
                 <div class="w-full md:w-2/3 hover-text-container">
-                    <h3 class="text-3xl md:text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 hover-text">Hello! 我是逄金鹏</h3>
+                    <h3 class="text-3xl md:text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 hover-text letter-jump">
+                        <span>H</span><span>e</span><span>l</span><span>l</span><span>o</span><span>!</span><span> </span><span>我</span><span>是</span><span>逄</span><span>金</span><span>鹏</span>
+                    </h3>
                     <p class="text-xl font-bold text-white mb-4 hover-text">AI 主创设计师</p>
                     <div class="space-y-6 text-[var(--secondary-text)] leading-relaxed text-base md:text-lg">
                         <p class="text-white/90 font-medium hover-text">
