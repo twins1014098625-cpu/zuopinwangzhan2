@@ -23,6 +23,8 @@
             --accent-purple: #7c3aed;
             --accent-cyan: #00D1D1;
             --accent-cyan-dim: rgba(0, 209, 209, 0.3);
+            --accent-pink: #ec4899;
+            --accent-indigo: #3b82f6;
             --neon-glow: rgba(0, 209, 209, 0.15);
             --cursor-size: 8px;
         }
@@ -101,6 +103,147 @@
             cursor: none;
             overflow-x: hidden;
             position: relative;
+        }
+
+        body.light-mode {
+            background-image: 
+                radial-gradient(ellipse at 50% 50%, rgba(0, 209, 209, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at 10% 80%, rgba(124, 58, 237, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 90% 20%, rgba(0, 209, 209, 0.02) 0%, transparent 40%);
+            background-size: 100% 100%;
+        }
+
+        /* 数字化几何网格背景 */
+        .digital-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 1;
+        }
+
+        body.light-mode .digital-grid {
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.08) 1px, transparent 1px);
+        }
+
+        /* 鼠标聚光灯效果 */
+        .mouse-spotlight {
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0.08) 25%,
+                rgba(255, 255, 255, 0.03) 50%,
+                transparent 75%,
+                transparent 100%
+            );
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        body:hover .mouse-spotlight {
+            opacity: 1;
+        }
+
+        body.light-mode .mouse-spotlight {
+            background: radial-gradient(
+                circle,
+                rgba(0, 0, 0, 0.12) 0%,
+                rgba(0, 0, 0, 0.06) 25%,
+                rgba(0, 0, 0, 0.02) 50%,
+                transparent 75%,
+                transparent 100%
+            );
+        }
+
+        /* 图片灰度悬停效果 */
+        .grayscale-on-hover {
+            filter: grayscale(100%);
+            transition: filter 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .grayscale-on-hover:hover {
+            filter: grayscale(0%);
+        }
+
+        /* ========================================
+           噪点（Noise）蒙层效果
+           作用：增添数字颗粒感，提升视觉质感
+           透明度：极低（1%-3%），不影响阅读
+           ======================================== */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+        }
+
+        /* 浅色模式下的噪点效果（稍高可见度） */
+        body.light-mode .noise-overlay {
+            opacity: 0.025;
+        }
+
+        /* ========================================
+           毛玻璃/磨砂玻璃（Glassmorphism）卡片组件
+           特点：半透明背景 + 模糊效果 + 微光边框
+           适用：作品集展示、服务项目介绍等
+           ======================================== */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 16px 48px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transform: translateY(-4px);
+        }
+
+        body.light-mode .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            border-color: rgba(0, 0, 0, 0.1);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        body.light-mode .glass-card:hover {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: 
+                0 16px 48px rgba(0, 0, 0, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
         }
 
         .perspective-grid {
@@ -294,6 +437,494 @@
             opacity: 0.8;
         }
 
+        /* 空间穿梭隧道效果 */
+        .space-warp-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -10;
+            overflow: hidden;
+            perspective: 1000px;
+        }
+
+        .warp-tunnel {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2000px;
+            height: 2000px;
+            transform: translate(-50%, -50%) rotateX(75deg);
+            background: 
+                repeating-conic-gradient(
+                    from 0deg,
+                    transparent 0deg 8deg,
+                    rgba(148, 0, 211, 0.03) 8deg 16deg
+                );
+            animation: tunnelRotate 30s linear infinite;
+            opacity: 0.5;
+        }
+
+        .warp-tunnel::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1500px;
+            height: 1500px;
+            transform: translate(-50%, -50%);
+            background: 
+                repeating-conic-gradient(
+                    from 0deg,
+                    transparent 0deg 5deg,
+                    rgba(0, 255, 255, 0.02) 5deg 10deg
+                );
+            animation: tunnelRotate 20s linear infinite reverse;
+        }
+
+        .warp-tunnel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 1000px;
+            height: 1000px;
+            transform: translate(-50%, -50%);
+            background: 
+                repeating-conic-gradient(
+                    from 0deg,
+                    transparent 0deg 12deg,
+                    rgba(255, 0, 255, 0.03) 12deg 24deg
+                );
+            animation: tunnelRotate 40s linear infinite;
+        }
+
+        @keyframes tunnelRotate {
+            from { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(0deg); }
+            to { transform: translate(-50%, -50%) rotateX(75deg) rotateZ(360deg); }
+        }
+
+        .warp-particles {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            transform-style: preserve-3d;
+            animation: particleFly 4s linear infinite;
+        }
+
+        .warp-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 50%;
+            box-shadow: 
+                0 0 6px var(--accent-cyan),
+                0 0 12px var(--accent-purple);
+            animation: warpSpeed 3s linear infinite;
+            opacity: 0;
+        }
+
+        .warp-particle:nth-child(odd) {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            box-shadow: 
+                0 0 6px var(--accent-purple),
+                0 0 12px var(--accent-cyan);
+        }
+
+        @keyframes warpSpeed {
+            0% {
+                transform: translateZ(-500px) scale(0.1);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateZ(500px) scale(2);
+                opacity: 0;
+            }
+        }
+
+        .p1 { animation-delay: 0s; animation-duration: 2.5s; }
+        .p2 { animation-delay: 0.2s; animation-duration: 3s; }
+        .p3 { animation-delay: 0.4s; animation-duration: 2.8s; }
+        .p4 { animation-delay: 0.6s; animation-duration: 3.2s; }
+        .p5 { animation-delay: 0.8s; animation-duration: 2.6s; }
+        .p6 { animation-delay: 1.0s; animation-duration: 3.5s; }
+        .p7 { animation-delay: 1.2s; animation-duration: 2.7s; }
+        .p8 { animation-delay: 1.4s; animation-duration: 3.1s; }
+        .p9 { animation-delay: 1.6s; animation-duration: 2.9s; }
+        .p10 { animation-delay: 1.8s; animation-duration: 3.3s; }
+        .p11 { animation-delay: 2.0s; animation-duration: 2.4s; }
+        .p12 { animation-delay: 2.2s; animation-duration: 3.6s; }
+        .p13 { animation-delay: 0.3s; animation-duration: 2.5s; }
+        .p14 { animation-delay: 0.5s; animation-duration: 3s; }
+        .p15 { animation-delay: 0.7s; animation-duration: 2.8s; }
+        .p16 { animation-delay: 0.9s; animation-duration: 3.2s; }
+        .p17 { animation-delay: 1.1s; animation-duration: 2.6s; }
+        .p18 { animation-delay: 1.3s; animation-duration: 3.5s; }
+        .p19 { animation-delay: 1.5s; animation-duration: 2.7s; }
+        .p20 { animation-delay: 1.7s; animation-duration: 3.1s; }
+
+        .p1 { left: -50px; top: -30px; }
+        .p2 { left: 30px; top: -60px; }
+        .p3 { left: -20px; top: 40px; }
+        .p4 { left: 50px; top: 20px; }
+        .p5 { left: -40px; top: -50px; }
+        .p6 { left: 20px; top: 50px; }
+        .p7 { left: -60px; top: 10px; }
+        .p8 { left: 40px; top: -40px; }
+        .p9 { left: -10px; top: -20px; }
+        .p10 { left: 60px; top: 30px; }
+        .p11 { left: -30px; top: -10px; }
+        .p12 { left: 10px; top: -50px; }
+        .p13 { left: -50px; top: 20px; }
+        .p14 { left: 30px; top: 10px; }
+        .p15 { left: -20px; top: -40px; }
+        .p16 { left: 50px; top: -20px; }
+        .p17 { left: -40px; top: 30px; }
+        .p18 { left: 20px; top: -10px; }
+        .p19 { left: -60px; top: -40px; }
+        .p20 { left: 40px; top: 40px; }
+
+        /* 悬停文字效果 */
+        .hover-text-container {
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 时空光影Canvas */
+        #cosmosCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -8;
+        }
+
+        /* 动力学文字效果容器 */
+        .kinetic-text-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -5;
+            overflow: hidden;
+        }
+
+        /* 服务项目卡片效果 */
+        .service-card {
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .service-card-inner {
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+
+        .service-card:hover .service-card-inner {
+            transform: translateY(-12px) scale(1.03);
+            border-color: rgba(148, 0, 211, 0.5);
+            box-shadow: 
+                0 25px 50px rgba(148, 0, 211, 0.2),
+                0 0 40px rgba(148, 0, 211, 0.15),
+                inset 0 0 60px rgba(148, 0, 211, 0.05);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, rgba(148, 0, 211, 0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            pointer-events: none;
+        }
+
+        .service-card:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* 鼠标跟随光点 */
+        .service-card-cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(148, 0, 211, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .service-card:hover .service-card-cursor {
+            opacity: 1;
+        }
+
+        /* 3D图标容器 */
+        .service-icon-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 500px;
+        }
+
+        .icon-3d {
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .icon-3d svg {
+            width: 100%;
+            height: 100%;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+        }
+
+        .icon-3d::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: currentColor;
+            opacity: 0.1;
+            transform: translateZ(-10px) scale(0.9);
+            border-radius: 12px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .service-card:hover .icon-3d {
+            transform: rotateX(-15deg) rotateY(-15deg) translateY(-4px);
+        }
+
+        .service-card:hover .icon-3d svg {
+            filter: drop-shadow(0 8px 20px currentColor);
+        }
+
+        .service-card:hover .icon-3d::before {
+            transform: translateZ(-15px) scale(0.85);
+            opacity: 0.15;
+        }
+
+        /* 图标颜色主题 */
+        .icon-purple {
+            color: var(--accent-purple);
+        }
+
+        .icon-cyan {
+            color: var(--accent-cyan);
+        }
+
+        .icon-pink {
+            color: var(--accent-pink);
+        }
+
+        .icon-indigo {
+            color: #06b6d4;
+        }
+
+        .service-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 200px;
+            transform: translate(-50%, -50%) scale(0);
+            background: radial-gradient(circle, rgba(148, 0, 211, 0.4) 0%, transparent 70%);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            border-radius: 50%;
+            filter: blur(50px);
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .service-glow.cyan {
+            background: radial-gradient(circle, rgba(0, 209, 209, 0.3) 0%, transparent 70%);
+        }
+
+        .service-glow.pink {
+            background: radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%);
+        }
+
+        .service-glow.indigo {
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, transparent 70%);
+        }
+
+        .service-card:hover .service-glow {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .service-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .service-particles .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(148, 0, 211, 0.6);
+            border-radius: 50%;
+            opacity: 0;
+            transform: translateY(0) scale(1);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .service-card:hover .service-particles .particle {
+            opacity: 1;
+        }
+
+        .service-card:hover .service-particles .p1 {
+            top: 20%;
+            left: 20%;
+            animation: particleFloat1 2s ease-in-out infinite;
+        }
+
+        .service-card:hover .service-particles .p2 {
+            top: 60%;
+            right: 25%;
+            animation: particleFloat2 2.5s ease-in-out infinite;
+            animation-delay: 0.3s;
+        }
+
+        .service-card:hover .service-particles .p3 {
+            bottom: 30%;
+            left: 50%;
+            animation: particleFloat3 2.2s ease-in-out infinite;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes particleFloat1 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-15px) translateX(10px); }
+            50% { transform: translateY(-8px) translateX(-5px); }
+            75% { transform: translateY(-20px) translateX(5px); }
+        }
+
+        @keyframes particleFloat2 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-10px) translateX(-15px); }
+            50% { transform: translateY(-25px) translateX(5px); }
+            75% { transform: translateY(-12px) translateX(-8px); }
+        }
+
+        @keyframes particleFloat3 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(15px); }
+            50% { transform: translateY(-10px) translateX(-10px); }
+            75% { transform: translateY(-25px) translateX(8px); }
+        }
+
+        .service-icon {
+            color: rgba(148, 0, 211, 0.6);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(0);
+        }
+
+        .service-card:hover .service-icon {
+            color: rgba(148, 0, 211, 1);
+            transform: translateY(-5px) scale(1.1);
+            text-shadow: 0 0 20px rgba(148, 0, 211, 0.6);
+        }
+
+        .service-card:nth-child(2) .service-icon { color: rgba(0, 209, 209, 0.6); }
+        .service-card:nth-child(2):hover .service-icon { 
+            color: rgba(0, 209, 209, 1); 
+            text-shadow: 0 0 20px rgba(0, 209, 209, 0.6);
+        }
+        .service-card:nth-child(2) .particle { background: rgba(0, 209, 209, 0.6); }
+
+        .service-card:nth-child(3) .service-icon { color: rgba(236, 72, 153, 0.6); }
+        .service-card:nth-child(3):hover .service-icon { 
+            color: rgba(236, 72, 153, 1); 
+            text-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
+        }
+        .service-card:nth-child(3) .particle { background: rgba(236, 72, 153, 0.6); }
+
+        .service-card:nth-child(4) .service-icon { color: rgba(99, 102, 241, 0.6); }
+        .service-card:nth-child(4):hover .service-icon { 
+            color: rgba(99, 102, 241, 1); 
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+        }
+        .service-card:nth-child(4) .particle { background: rgba(99, 102, 241, 0.6); }
+
+        .service-title {
+            transition: all 0.4s ease;
+            transform: translateX(0);
+        }
+
+        .service-card:hover .service-title {
+            transform: translateX(8px);
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .service-desc {
+            transition: all 0.4s ease;
+            opacity: 0.7;
+        }
+
+        .service-card:hover .service-desc {
+            opacity: 1;
+            transform: translateX(4px);
+        }
+
+        #kineticCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hover-text {
+            color: rgba(100, 100, 100, 0.7); /* 默认灰色 */
+            filter: grayscale(60%);
+            transition: 
+                color 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+                filter 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+
+        .hover-text-container:hover .hover-text {
+            color: inherit; /* 恢复正常颜色 */
+            filter: grayscale(0%);
+            transition: 
+                color 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* 标题特殊处理 */
+        .hover-text-container:hover h3.hover-text {
+            background-position: 0% 50%;
+        }
+
         .hero-bg-text {
             font-size: 16vw;
             line-height: 0.8;
@@ -413,12 +1044,367 @@
     </style>
 </head>
 <body class="overflow-x-hidden">
+    <!-- 噪点蒙层 -->
+    <div class="noise-overlay"></div>
+    
+    <!-- 数字化几何网格背景 -->
+    <div class="digital-grid"></div>
+    
+    <!-- 鼠标聚光灯元素 -->
+    <div class="mouse-spotlight" id="mouseSpotlight"></div>
+
+    <script>
+        // ========================================
+        // 时空光影效果 - 纯净的数字宇宙感
+        // ========================================
+        const cosmosCanvas = document.getElementById('cosmosCanvas');
+        const cosmosCtx = cosmosCanvas.getContext('2d');
+        
+        let cosmosParticles = [];
+        const cosmosParticleCount = 100;
+        
+        function resizeCosmosCanvas() {
+            cosmosCanvas.width = window.innerWidth;
+            cosmosCanvas.height = window.innerHeight;
+        }
+        
+        class CosmosParticle {
+            constructor() {
+                this.reset();
+            }
+            
+            reset() {
+                this.x = Math.random() * cosmosCanvas.width;
+                this.y = Math.random() * cosmosCanvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.5 + 0.2;
+                this.pulseSpeed = Math.random() * 0.02 + 0.01;
+                this.pulseOffset = Math.random() * Math.PI * 2;
+                this.hue = Math.random() > 0.5 ? 180 : 280;
+            }
+            
+            update(time) {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                
+                this.currentOpacity = this.opacity * (0.7 + 0.3 * Math.sin(time * this.pulseSpeed + this.pulseOffset));
+                
+                if (this.x < 0 || this.x > cosmosCanvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > cosmosCanvas.height) this.speedY *= -1;
+            }
+            
+            draw() {
+                cosmosCtx.beginPath();
+                cosmosCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                cosmosCtx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.currentOpacity})`;
+                cosmosCtx.fill();
+                
+                cosmosCtx.beginPath();
+                cosmosCtx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                cosmosCtx.fillStyle = `hsla(${this.hue}, 80%, 60%, ${this.currentOpacity * 0.15})`;
+                cosmosCtx.fill();
+            }
+        }
+        
+        function drawConnections() {
+            for (let i = 0; i < cosmosParticles.length; i++) {
+                for (let j = i + 1; j < cosmosParticles.length; j++) {
+                    const dx = cosmosParticles[i].x - cosmosParticles[j].x;
+                    const dy = cosmosParticles[i].y - cosmosParticles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < 150) {
+                        cosmosCtx.beginPath();
+                        cosmosCtx.moveTo(cosmosParticles[i].x, cosmosParticles[i].y);
+                        cosmosCtx.lineTo(cosmosParticles[j].x, cosmosParticles[j].y);
+                        cosmosCtx.strokeStyle = `rgba(148, 0, 211, ${0.08 * (1 - distance / 150)})`;
+                        cosmosCtx.stroke();
+                    }
+                }
+            }
+        }
+        
+        function initCosmosParticles() {
+            cosmosParticles = [];
+            for (let i = 0; i < cosmosParticleCount; i++) {
+                cosmosParticles.push(new CosmosParticle());
+            }
+        }
+        
+        function animateCosmos(time) {
+            cosmosCtx.clearRect(0, 0, cosmosCanvas.width, cosmosCanvas.height);
+            
+            cosmosParticles.forEach(particle => {
+                particle.update(time);
+                particle.draw();
+            });
+            
+            drawConnections();
+            requestAnimationFrame(animateCosmos);
+        }
+        
+        // ========================================
+        // 动力学反馈 - 磁力吸附与碎裂
+        // ========================================
+        const kineticCanvas = document.getElementById('kineticCanvas');
+        const kineticCtx = kineticCanvas.getContext('2d');
+        
+        let kineticParticles = [];
+        let attractorX = 0, attractorY = 0;
+        let attractorMode = 'vortex';
+        let isAttractorActive = false;
+        let attractorRadius = 0;
+        let attractorStrength = 0;
+        
+        class KineticParticle {
+            constructor(x, y) {
+                this.originX = x;
+                this.originY = y;
+                this.x = x;
+                this.y = y;
+                this.vx = (Math.random() - 0.5) * 15;
+                this.vy = (Math.random() - 0.5) * 15;
+                this.size = Math.random() * 3 + 1;
+                this.life = 1;
+                this.decay = Math.random() * 0.006 + 0.003;
+                this.hue = Math.random() > 0.5 ? 180 : 280;
+                this.glowSize = Math.random() * 10 + 5;
+            }
+            
+            update() {
+                if (isAttractorActive && attractorStrength > 0) {
+                    const dx = attractorX - this.x;
+                    const dy = attractorY - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (attractorMode === 'vortex') {
+                        const angle = Math.atan2(dy, dx) + 0.12;
+                        const force = attractorStrength * (1 + 60 / Math.max(distance, 10));
+                        this.vx += Math.cos(angle) * force * 0.08;
+                        this.vy += Math.sin(angle) * force * 0.08;
+                        this.vx += Math.sin(angle) * force * 0.04;
+                        this.vy -= Math.cos(angle) * force * 0.04;
+                    } else if (attractorMode === 'ring') {
+                        const targetRadius = attractorRadius;
+                        const currentRadius = distance;
+                        const angle = Math.atan2(dy, dx);
+                        
+                        if (currentRadius > targetRadius * 0.9) {
+                            const ringForce = attractorStrength * 0.12;
+                            this.vx = Math.cos(angle) * currentRadius * 0.015 + (dx - Math.cos(angle) * targetRadius) * ringForce;
+                            this.vy = Math.sin(angle) * currentRadius * 0.015 + (dy - Math.sin(angle) * targetRadius) * ringForce;
+                        }
+                    }
+                }
+                
+                this.vx *= 0.97;
+                this.vy *= 0.97;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay * (isAttractorActive ? 0.2 : 1);
+            }
+            
+            draw() {
+                if (this.life <= 0) return;
+                
+                const gradient = kineticCtx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, this.glowSize
+                );
+                gradient.addColorStop(0, `hsla(${this.hue}, 100%, 75%, ${this.life})`);
+                gradient.addColorStop(0.4, `hsla(${this.hue}, 100%, 55%, ${this.life * 0.6})`);
+                gradient.addColorStop(1, `hsla(${this.hue}, 100%, 50%, 0)`);
+                
+                kineticCtx.beginPath();
+                kineticCtx.arc(this.x, this.y, this.glowSize, 0, Math.PI * 2);
+                kineticCtx.fillStyle = gradient;
+                kineticCtx.fill();
+                
+                kineticCtx.beginPath();
+                kineticCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                kineticCtx.fillStyle = `hsla(${this.hue}, 100%, 95%, ${this.life})`;
+                kineticCtx.fill();
+            }
+        }
+        
+        function resizeKineticCanvas() {
+            kineticCanvas.width = window.innerWidth;
+            kineticCanvas.height = window.innerHeight;
+        }
+        
+        let lastMouseMoveTime = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            lastMouseMoveTime = Date.now();
+            
+            if (Math.random() > 0.6) {
+                const particle = new KineticParticle(
+                    e.clientX + (Math.random() - 0.5) * 60,
+                    e.clientY + (Math.random() - 0.5) * 60
+                );
+                kineticParticles.push(particle);
+            }
+        });
+        
+        document.addEventListener('click', (e) => {
+            attractorX = e.clientX;
+            attractorY = e.clientY;
+            isAttractorActive = true;
+            attractorMode = Math.random() > 0.5 ? 'vortex' : 'ring';
+            attractorRadius = 120 + Math.random() * 80;
+            attractorStrength = 3;
+            
+            for (let i = 0; i < 60; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 40;
+                const particle = new KineticParticle(
+                    attractorX + Math.cos(angle) * distance,
+                    attractorY + Math.sin(angle) * distance
+                );
+                particle.vx = Math.cos(angle) * (Math.random() * 12 + 6);
+                particle.vy = Math.sin(angle) * (Math.random() * 12 + 6);
+                kineticParticles.push(particle);
+            }
+            
+            setTimeout(() => { attractorStrength = 10; }, 800);
+            setTimeout(() => { attractorStrength = 15; }, 1500);
+            setTimeout(() => { isAttractorActive = false; attractorStrength = 0; }, 3000);
+        });
+        
+        function animateKinetic() {
+            kineticCtx.clearRect(0, 0, kineticCanvas.width, kineticCanvas.height);
+            
+            if (isAttractorActive && attractorStrength > 0) {
+                attractorStrength *= 0.992;
+            }
+            
+            kineticParticles = kineticParticles.filter(p => p.life > 0);
+            kineticParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+            
+            if (isAttractorActive && attractorStrength > 2) {
+                kineticCtx.beginPath();
+                if (attractorMode === 'vortex') {
+                    for (let i = 0; i < 3; i++) {
+                        kineticCtx.arc(attractorX, attractorY, 20 + i * 15, 0, Math.PI * 2);
+                    }
+                } else {
+                    kineticCtx.arc(attractorX, attractorY, attractorRadius, 0, Math.PI * 2);
+                }
+                kineticCtx.strokeStyle = `rgba(0, 255, 255, ${attractorStrength * 0.06})`;
+                kineticCtx.lineWidth = 1;
+                kineticCtx.stroke();
+            }
+            
+            requestAnimationFrame(animateKinetic);
+        }
+        
+        // ========================================
+        // 鼠标聚光灯效果
+        // ========================================
+        function initMouseSpotlight() {
+            const spotlight = document.getElementById('mouseSpotlight');
+            
+            if (!spotlight) return;
+            
+            document.addEventListener('mousemove', (e) => {
+                spotlight.style.left = `${e.clientX}px`;
+                spotlight.style.top = `${e.clientY}px`;
+            });
+        }
+
+        // ========================================
+        // 服务项目卡片鼠标跟随效果
+        // ========================================
+        function initServiceCardEffects() {
+            const serviceCards = document.querySelectorAll('.service-card');
+            
+            serviceCards.forEach((card) => {
+                const cursor = card.querySelector('.service-card-cursor');
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    if (cursor) {
+                        cursor.style.left = `${x}px`;
+                        cursor.style.top = `${y}px`;
+                        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    if (cursor) {
+                        cursor.style.transform = 'translate(-50%, -50%) scale(0)';
+                    }
+                });
+            });
+        }
+        
+        function initEffects() {
+            resizeCosmosCanvas();
+            resizeKineticCanvas();
+            initCosmosParticles();
+            initMouseSpotlight();
+            initServiceCardEffects();
+            
+            window.addEventListener('resize', () => {
+                resizeCosmosCanvas();
+                resizeKineticCanvas();
+            });
+            
+            animateCosmos(0);
+            animateKinetic();
+        }
+        
+        window.addEventListener('load', initEffects);
+    </script>
 
     <!-- 透视网格背景 -->
     <div class="perspective-grid"></div>
     
     <!-- 粒子容器 -->
     <div class="particles-container" id="particles-container"></div>
+
+    <!-- 时空光影Canvas -->
+    <canvas id="cosmosCanvas"></canvas>
+
+    <!-- 动力学文字效果容器 -->
+    <div id="kinetic-text-container" class="kinetic-text-container">
+        <canvas id="kineticCanvas"></canvas>
+    </div>
+
+    <!-- 空间穿梭隧道效果 -->
+    <div class="space-warp-container">
+        <div class="warp-tunnel"></div>
+        <div class="warp-particles">
+            <div class="warp-particle p1"></div>
+            <div class="warp-particle p2"></div>
+            <div class="warp-particle p3"></div>
+            <div class="warp-particle p4"></div>
+            <div class="warp-particle p5"></div>
+            <div class="warp-particle p6"></div>
+            <div class="warp-particle p7"></div>
+            <div class="warp-particle p8"></div>
+            <div class="warp-particle p9"></div>
+            <div class="warp-particle p10"></div>
+            <div class="warp-particle p11"></div>
+            <div class="warp-particle p12"></div>
+            <div class="warp-particle p13"></div>
+            <div class="warp-particle p14"></div>
+            <div class="warp-particle p15"></div>
+            <div class="warp-particle p16"></div>
+            <div class="warp-particle p17"></div>
+            <div class="warp-particle p18"></div>
+            <div class="warp-particle p19"></div>
+            <div class="warp-particle p20"></div>
+        </div>
+    </div>
 
     <div id="custom-cursor"></div>
     <div id="cursor-follower"></div>
@@ -495,7 +1481,7 @@
             <div class="reveal hidden md:block">
                 <div class="relative">
                     <div class="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-cyan-500/20 blur-3xl rounded-full"></div>
-                    <img src="大头像.png" alt="设计师形象" class="relative w-full max-w-lg mx-auto rounded-2xl border border-purple-500/30 shadow-2xl shadow-purple-500/10 object-cover aspect-[3/4]">
+                    <img src="大头像.png" alt="设计师形象" class="grayscale-on-hover relative w-full max-w-lg mx-auto rounded-2xl border border-purple-500/30 shadow-2xl shadow-purple-500/10 object-cover aspect-[3/4]">
                 </div>
             </div>
         </div>
@@ -509,22 +1495,100 @@
                 <h2 class="text-4xl font-black text-white">服务项目</h2>
                 <p class="text-[var(--secondary-text)] mt-2">SERVICES / 跨境视觉解决方案</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
-                    <h3 class="font-bold text-xl mb-4 text-white">产品主副图全套</h3>
-                    <p class="text-[var(--secondary-text)] text-sm">高点击率白底图、场景合成图、对比评测图设计。</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 grid-auto-rows-1fr">
+                <div class="service-card group" data-service="1">
+                    <div class="service-card-cursor"></div>
+                    <div class="service-card-inner h-full p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm relative overflow-hidden flex flex-col">
+                        <div class="service-glow"></div>
+                        <div class="service-particles">
+                            <span class="particle p1"></span>
+                            <span class="particle p2"></span>
+                            <span class="particle p3"></span>
+                        </div>
+                        <div class="service-icon-wrapper mb-6">
+                            <div class="icon-3d icon-purple">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="8" y="12" width="32" height="24" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                                    <rect x="12" y="16" width="10" height="8" rx="1" fill="currentColor" opacity="0.6"/>
+                                    <rect x="26" y="16" width="10" height="8" rx="1" fill="currentColor" opacity="0.6"/>
+                                    <rect x="12" y="28" width="24" height="6" rx="1" fill="currentColor" opacity="0.4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4 text-white service-title">产品主副图全套</h3>
+                        <p class="text-[var(--secondary-text)] text-sm service-desc flex-grow">高点击率白底图、场景合成图、对比评测图设计。</p>
+                    </div>
                 </div>
-                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
-                    <h3 class="font-bold text-xl mb-4 text-white">品牌旗舰店装修</h3>
-                    <p class="text-[var(--secondary-text)] text-sm">旗舰店风格系统设计与故事感页面构建。</p>
+                <div class="service-card group" data-service="2">
+                    <div class="service-card-cursor"></div>
+                    <div class="service-card-inner h-full p-8 bg-zinc-950/50 backdrop-blur-sm border border-cyan-500/10 rounded-sm relative overflow-hidden flex flex-col">
+                        <div class="service-glow cyan"></div>
+                        <div class="service-particles">
+                            <span class="particle p1"></span>
+                            <span class="particle p2"></span>
+                            <span class="particle p3"></span>
+                        </div>
+                        <div class="service-icon-wrapper mb-6">
+                            <div class="icon-3d icon-cyan">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="10" y="20" width="28" height="20" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                                    <path d="M8 20 L16 12 L32 12 L40 20" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                                    <rect x="16" y="26" width="6" height="10" rx="1" fill="currentColor" opacity="0.5"/>
+                                    <rect x="26" y="26" width="6" height="10" rx="1" fill="currentColor" opacity="0.5"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4 text-white service-title">品牌旗舰店装修</h3>
+                        <p class="text-[var(--secondary-text)] text-sm service-desc flex-grow">旗舰店风格系统设计与故事感页面构建。</p>
+                    </div>
                 </div>
-                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
-                    <h3 class="font-bold text-xl mb-4 text-white">高阶3D建模渲染</h3>
-                    <p class="text-[var(--secondary-text)] text-sm">像素级产品建模与光影精修，创造高端溢价视觉。</p>
+                <div class="service-card group" data-service="3">
+                    <div class="service-card-cursor"></div>
+                    <div class="service-card-inner h-full p-8 bg-zinc-950/50 backdrop-blur-sm border border-pink-500/10 rounded-sm relative overflow-hidden flex flex-col">
+                        <div class="service-glow pink"></div>
+                        <div class="service-particles">
+                            <span class="particle p1"></span>
+                            <span class="particle p2"></span>
+                            <span class="particle p3"></span>
+                        </div>
+                        <div class="service-icon-wrapper mb-6">
+                            <div class="icon-3d icon-pink">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="10" y="16" width="28" height="28" rx="3" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                                    <path d="M10 24 L38 24" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                                    <path d="M18 16 L18 44" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                                    <rect x="14" y="20" width="8" height="8" rx="1" fill="currentColor" opacity="0.3"/>
+                                    <rect x="26" y="32" width="8" height="8" rx="1" fill="currentColor" opacity="0.3"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4 text-white service-title">高阶3D建模渲染</h3>
+                        <p class="text-[var(--secondary-text)] text-sm service-desc flex-grow">像素级产品建模与光影精修，创造高端溢价视觉。</p>
+                    </div>
                 </div>
-                <div class="p-8 bg-zinc-950/50 backdrop-blur-sm border border-purple-500/10 rounded-sm group hover:border-purple-500/30 transition-all duration-300">
-                    <h3 class="font-bold text-xl mb-4 text-white">AI视频制作</h3>
-                    <p class="text-[var(--secondary-text)] text-sm">AI驱动的产品动画、功能演示视频、品牌故事短片制作，提升产品转化率。</p>
+                <div class="service-card group" data-service="4">
+                    <div class="service-card-cursor"></div>
+                    <div class="service-card-inner h-full p-8 bg-zinc-950/50 backdrop-blur-sm border border-indigo-500/10 rounded-sm relative overflow-hidden flex flex-col">
+                        <div class="service-glow indigo"></div>
+                        <div class="service-particles">
+                            <span class="particle p1"></span>
+                            <span class="particle p2"></span>
+                            <span class="particle p3"></span>
+                        </div>
+                        <div class="service-icon-wrapper mb-6">
+                            <div class="icon-3d icon-indigo">
+                                <svg viewBox="0 0 48 48" fill="none">
+                                    <rect x="10" y="14" width="28" height="20" rx="2" stroke="currentColor" stroke-width="2.5" fill="none"/>
+                                    <circle cx="18" cy="24" r="3" fill="currentColor" opacity="0.7"/>
+                                    <path d="M32 22 L36 24 L32 26 Z" fill="currentColor" opacity="0.7"/>
+                                    <rect x="12" y="36" width="24" height="4" rx="2" fill="currentColor" opacity="0.5"/>
+                                    <rect x="14" y="37" width="6" height="2" rx="1" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="font-bold text-xl mb-4 text-white service-title">AI视频制作</h3>
+                        <p class="text-[var(--secondary-text)] text-sm service-desc flex-grow">AI驱动的产品动画、功能演示视频、品牌故事短片制作，提升产品转化率。</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1295,19 +2359,19 @@
                         <img src="头像.jpg" alt="设计师" class="w-full h-full object-cover">
                     </div>
                 </div>
-                <div class="w-full md:w-2/3">
-                    <h3 class="text-3xl md:text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400">Hello! 我是逄金鹏</h3>
-                    <p class="text-xl font-bold text-white mb-4">AI 主创设计师</p>
+                <div class="w-full md:w-2/3 hover-text-container">
+                    <h3 class="text-3xl md:text-4xl font-black mb-8 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 hover-text">Hello! 我是逄金鹏</h3>
+                    <p class="text-xl font-bold text-white mb-4 hover-text">AI 主创设计师</p>
                     <div class="space-y-6 text-[var(--secondary-text)] leading-relaxed text-base md:text-lg">
-                        <p class="text-white/90 font-medium">
+                        <p class="text-white/90 font-medium hover-text">
                             <span class="text-cyan-400 mr-2">//</span>
                             精通 <span class="text-cyan-300 font-semibold">Photoshop</span>、<span class="text-purple-300 font-semibold">Cinema 4D</span>、<span class="text-pink-300 font-semibold">AI渲染工具</span> 等专业设计软件，具备高效完成各类视觉设计任务的能力。
                         </p>
-                        <p class="text-white/80">
+                        <p class="text-white/80 hover-text">
                             <span class="text-purple-400 mr-2">//</span>
                             专注于白底图精修、场景渲染、CGI视觉制作与AI视频创作，为跨境电商提供全方位视觉解决方案。
                         </p>
-                        <p class="text-white/80">
+                        <p class="text-white/80 hover-text">
                             <span class="text-pink-400 mr-2">//</span>
                             秉持 "<span class="text-cyan-300 font-semibold">合规为基础，转化为核心</span>" 的设计理念，融合高端渲染调性，助力卖家打造差异化视觉竞争力。
                         </p>
