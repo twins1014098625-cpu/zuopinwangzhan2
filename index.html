@@ -11,6 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="Hyperspeed.css">
     <script src="Hyperspeed.js"></script>
+    <link rel="stylesheet" href="PathAnimation.css">
+    <script src="PathAnimation.js"></script>
+    <link rel="stylesheet" href="MechWarrior.css">
+    <script src="MechWarrior.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
 
@@ -1729,6 +1733,20 @@
         }
 
         let hyperspeed = null;
+        let scrollPathAnimation = null;
+
+        function initScrollPathAnimation() {
+            const existingContainer = document.getElementById('scrollPathContainer');
+            if (!existingContainer && typeof ScrollPathAnimation !== 'undefined') {
+                scrollPathAnimation = new ScrollPathAnimation({
+                    pathColor: '#00D1D1',
+                    pathGlowColor: '#7C3AED',
+                    nodeSize: 8,
+                    animationSpeed: 0.5,
+                    offsetX: 120
+                });
+            }
+        }
 
         function initHyperspeed() {
             const container = document.getElementById('hyperspeedContainer');
@@ -1755,6 +1773,14 @@
             }
         }
 
+        let mechWarrior = null;
+
+        function initMechWarrior() {
+            if (typeof MechWarrior !== 'undefined') {
+                mechWarrior = new MechWarrior();
+            }
+        }
+
         function initEffects() {
             resizeCosmosCanvas();
             resizeKineticCanvas();
@@ -1764,6 +1790,8 @@
             initTypewriter();
             initLatticeSphere();
             initHyperspeed();
+            initScrollPathAnimation();
+            initMechWarrior();
             
             window.addEventListener('resize', () => {
                 resizeCosmosCanvas();
@@ -2021,7 +2049,6 @@
                     <span class="category-tag" data-filter="video">产品视频</span>
                     <span class="category-tag" data-filter="image">产品主图</span>
                     <span class="category-tag" data-filter="secondary">产品副图</span>
-                    <span class="category-tag" data-filter="storyboard">产品分镜</span>
                 </div>
             </div>
 
@@ -2178,6 +2205,28 @@
             <div class="mb-12 reveal">
                 <h2 class="text-3xl font-black text-white">产品主图</h2>
                 <p class="text-[var(--secondary-text)] mt-2">MAIN IMAGES / 精选主打案例展示</p>
+            </div>
+
+            <!-- 产品图片展示 -->
+            <div class="grid grid-cols-3 gap-4 mb-12 reveal">
+                <div class="bg-zinc-900/40 rounded-xl border border-[var(--border-color)] overflow-hidden aspect-square group">
+                    <img src="礼物灯1.jpg" alt="礼物灯1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <div class="bg-zinc-900/40 rounded-xl border border-[var(--border-color)] overflow-hidden aspect-square group">
+                    <img src="礼物灯2.jpg" alt="礼物灯2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <div class="bg-zinc-900/40 rounded-xl border border-[var(--border-color)] overflow-hidden aspect-square group">
+                    <img src="礼物灯3.jpg" alt="礼物灯3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <div class="bg-zinc-900/40 rounded-xl border border-[var(--border-color)] overflow-hidden aspect-square group">
+                    <img src="礼物灯4.jpg" alt="礼物灯4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <div class="bg-zinc-900/40 rounded-xl border border-[var(--border-color)] overflow-hidden aspect-square group">
+                    <img src="礼物灯5.jpg" alt="礼物灯5" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
+                <div class="bg-zinc-900/40 rounded-xl border border-[var(--border-color)] overflow-hidden aspect-square group">
+                    <img src="礼物灯6.jpg" alt="礼物灯6" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                </div>
             </div>
 
             <!-- 主打选框卡片 1 (M9PRO Max 游戏鼠标全案) -->
@@ -2610,155 +2659,7 @@
         </div>
     </section>
 
-    <!-- 产品分镜展示 -->
-    <section id="storyboards" class="py-32 px-8 bg-zinc-950/30">
-        <div class="container mx-auto px-6 md:px-16 lg:px-24">
-            <div class="mb-20 reveal">
-                <h2 class="text-4xl font-black text-white">产品分镜</h2>
-                <p class="text-[var(--secondary-text)] mt-2">STORYBOARDS / 视觉叙事与创意分镜</p>
-            </div>
-            
-            <!-- 分镜A -->
-            <div class="mb-8">
-                <span class="text-sm font-mono text-[var(--accent-purple)] uppercase tracking-[0.25em] font-bold">STORYBOARD A</span>
-            </div>
-            <!-- 第一组 3x3 卡片 -->
-            <div class="grid grid-cols-3 gap-4 mb-16">
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (1).png" alt="分镜01" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (2).png" alt="分镜02" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (3).png" alt="分镜03" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (4).png" alt="分镜04" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (5).png" alt="分镜05" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (6).png" alt="分镜06" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (7).png" alt="分镜07" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (8).png" alt="分镜08" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-purple-500/10 hover:border-purple-500/30 transition-all duration-300">
-                    <img src="耳机线稿 (9).png" alt="分镜09" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-            </div>
-            
-            <!-- 分镜B -->
-            <div class="mb-8">
-                <span class="text-sm font-mono text-[var(--accent-cyan)] uppercase tracking-[0.25em] font-bold">STORYBOARD B</span>
-            </div>
-            <!-- 第二组 3x3 卡片 -->
-            <div class="grid grid-cols-3 gap-4 mb-16">
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (1).png" alt="分镜10" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (2).png" alt="分镜11" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (3).png" alt="分镜12" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (4).png" alt="分镜13" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (5).png" alt="分镜14" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (6).png" alt="分镜15" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (7).png" alt="分镜16" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (8).png" alt="分镜17" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300">
-                    <img src="刮胡刀线稿 (9).png" alt="分镜18" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-            </div>
-            
-            <!-- 分镜C -->
-            <div class="mb-8">
-                <span class="text-sm font-mono text-pink-400 uppercase tracking-[0.25em] font-bold">STORYBOARD C</span>
-            </div>
-            <!-- 第三组 3x3 卡片 -->
-            <div class="grid grid-cols-3 gap-4 mb-16">
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (1).png" alt="分镜19" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (2).png" alt="分镜20" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (3).png" alt="分镜21" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (4).png" alt="分镜22" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (5).png" alt="分镜23" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (6).png" alt="分镜24" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (7).png" alt="分镜25" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (8).png" alt="分镜26" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-pink-500/10 hover:border-pink-500/30 transition-all duration-300">
-                    <img src="鼠标线稿 (9).png" alt="分镜27" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-            </div>
-            
-            <!-- 分镜D -->
-            <div class="mb-8">
-                <span class="text-sm font-mono text-indigo-400 uppercase tracking-[0.25em] font-bold">STORYBOARD D</span>
-            </div>
-            <!-- 第四组 3x3 卡片 -->
-            <div class="grid grid-cols-3 gap-4">
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (1).png" alt="分镜28" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (2).png" alt="分镜29" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (3).png" alt="分镜30" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (4).png" alt="分镜31" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (5).png" alt="分镜32" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (6).png" alt="分镜33" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (7).png" alt="分镜34" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (8).png" alt="分镜35" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="aspect-square bg-zinc-900/60 rounded-lg overflow-hidden border border-indigo-500/10 hover:border-indigo-500/30 transition-all duration-300">
-                    <img src="蓝鼠标线稿 (9).png" alt="分镜36" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- 关于我 -->
     <section id="about" class="py-40 px-8 border-t border-[var(--border-color)]">
